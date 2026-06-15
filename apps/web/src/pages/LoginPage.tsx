@@ -82,10 +82,14 @@ export default function LoginPage() {
       >
         {/* Logo */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <rect width="40" height="40" rx="8" fill="oklch(52% 0.22 260)" />
-            <rect x="8" y="8" width="10" height="24" rx="2" fill="white" opacity="0.9" />
-            <rect x="22" y="8" width="10" height="16" rx="2" fill="white" opacity="0.6" />
+          <svg width="56" height="56" viewBox="0 0 40 40" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#FCF9F6" stroke="#CA4A2C" strokeWidth="1.5"/>
+            <text x="7" y="28"
+              fontFamily="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
+              fontWeight="700"
+              fontSize="21"
+              fill="#CA4A2C"
+              letterSpacing="-0.5">FB</text>
           </svg>
           <span style={{ fontSize: "1.25rem", fontWeight: 600, letterSpacing: "-0.02em", fontFamily: "var(--font-display)" }}>
             FlowBoard
