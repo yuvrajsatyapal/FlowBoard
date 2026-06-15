@@ -1,6 +1,6 @@
 <div align="center">
 
-# FlowGrid
+# FlowBoard
 
 **A production-grade Kanban project management platform with real-time collaboration, analytics, and a full notification system — built for teams that ship.**
 
@@ -16,7 +16,7 @@
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 [![pnpm](https://img.shields.io/badge/pnpm-9-F69220?style=flat-square&logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![Turborepo](https://img.shields.io/badge/Turborepo-2-EF4444?style=flat-square&logo=turborepo&logoColor=white)](https://turbo.build/)
-[![CI](https://img.shields.io/github/actions/workflow/status/yuvrajsatyapal/FlowGrid/ci.yml?style=flat-square&label=CI&logo=github-actions&logoColor=white)](https://github.com/yuvrajsatyapal/FlowGrid/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/yuvrajsatyapal/FlowBoard/ci.yml?style=flat-square&label=CI&logo=github-actions&logoColor=white)](https://github.com/yuvrajsatyapal/FlowBoard/actions)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
 
 </div>
@@ -87,7 +87,7 @@
 
 ## Project Overview
 
-Modern teams waste time juggling disconnected tools. FlowGrid solves this by giving every team a single Kanban workspace where cards, deadlines, comments, files, and real-time collaboration live in one place.
+Modern teams waste time juggling disconnected tools. FlowBoard solves this by giving every team a single Kanban workspace where cards, deadlines, comments, files, and real-time collaboration live in one place.
 
 **Who it is for:**
 - Engineering teams tracking sprints
@@ -97,7 +97,7 @@ Modern teams waste time juggling disconnected tools. FlowGrid solves this by giv
 
 **Key problems it solves:**
 
-| Problem | FlowGrid Solution |
+| Problem | FlowBoard Solution |
 |---|---|
 | Scattered task management | Kanban boards with lists, cards, priorities, and deadlines |
 | No visibility into team activity | Append-only activity audit log + real-time updates |
@@ -330,7 +330,7 @@ flowchart LR
 ## Folder Structure
 
 ```
-flowgrid/                       ← pnpm monorepo root
+flowboard/                       ← pnpm monorepo root
 ├── apps/
 │   ├── api/                    ← Express + Prisma backend
 │   │   ├── prisma/
@@ -448,7 +448,7 @@ flowgrid/                       ← pnpm monorepo root
 
 ## Database Schema
 
-FlowGrid uses a 4-tier hierarchy: **Organization → Workspace → Board → Card**, with soft deletes at every business tier.
+FlowBoard uses a 4-tier hierarchy: **Organization → Workspace → Board → Card**, with soft deletes at every business tier.
 
 ```mermaid
 erDiagram
@@ -654,7 +654,7 @@ erDiagram
 
 ## Authentication Flow
 
-FlowGrid uses **Google OAuth 2.0 only** — no passwords. Access tokens are short-lived JWTs; refresh tokens are stored in HTTP-only cookies and rotated on every use.
+FlowBoard uses **Google OAuth 2.0 only** — no passwords. Access tokens are short-lived JWTs; refresh tokens are stored in HTTP-only cookies and rotated on every use.
 
 ```mermaid
 sequenceDiagram
@@ -699,7 +699,7 @@ sequenceDiagram
 
 ## Real-Time Architecture
 
-FlowGrid uses Socket.IO 4 running in the same process as Express. Presence state is stored in Upstash Redis so it survives server restarts cleanly.
+FlowBoard uses Socket.IO 4 running in the same process as Express. Presence state is stored in Upstash Redis so it survives server restarts cleanly.
 
 ```mermaid
 sequenceDiagram
@@ -1029,8 +1029,8 @@ All endpoints are prefixed with `/api`. JWT required on all routes except `/api/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yuvrajsatyapal/FlowGrid.git
-cd FlowGrid
+git clone https://github.com/yuvrajsatyapal/FlowBoard.git
+cd FlowBoard
 
 # 2. Install all workspace dependencies
 pnpm install
@@ -1121,8 +1121,8 @@ In Google Cloud Console add the **Vercel** URL as an Authorized JavaScript origi
 
 ```bash
 # 1. Clone and configure
-git clone https://github.com/yuvrajsatyapal/FlowGrid.git
-cd FlowGrid
+git clone https://github.com/yuvrajsatyapal/FlowBoard.git
+cd FlowBoard
 cp apps/api/.env.example apps/api/.env
 # Fill in all required secrets
 
