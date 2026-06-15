@@ -1,57 +1,50 @@
 import { useEffect, useRef } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
+import { authApi } from "../api/auth"
 
-/**
- * Landing page after Google OAuth redirect.
- *
- * The backend sets an httpOnly refresh cookie and redirects here.
- * AuthProvider already fires a silent refresh on mount — calling
- * authApi.refresh() here a second time races against it. Since the
- * backend rotates the refresh token on every use (deletes the old jti),
- * the second concurrent call always gets a 401, clearing auth state
- * and causing a login loop.
- *
- * Fix: let AuthProvider's mount refresh own the token exchange.
- * This page just waits for isLoading → false, then navigates.
- */
 export default function AuthCallbackPage() {
-  const { isLoading, isAuthenticated, user } = useAuth()
+  const { setTokenAndUser } = useAuth()
   const navigate = useNavigate()
-  // Guard against double-navigation in React StrictMode double-invoke
-  const navigated = useRef(false)
+  const location = useLocation()
+  const ran = useRef(false)
 
   useEffect(() => {
-    if (isLoading) return
-    if (navigated.current) return
-    // Once we commit a direction, don't re-navigate if auth state changes again.
-    // AuthProvider has no retry path — a failed refresh means the user must re-login.
-    navigated.current = true
+    if (ran.current) return
+    ran.current = true
 
-    if (!isAuthenticated) {
+    const code = new URLSearchParams(location.search).get("code")
+
+    if (!code) {
       navigate("/login?error=auth_failed", { replace: true })
       return
     }
 
-    // If user was redirected here from an invite link, return them there.
-    // Same-origin check prevents open redirect.
-    const inviteNext = sessionStorage.getItem("invite_next")
-    if (inviteNext) {
-      sessionStorage.removeItem("invite_next")
-      try {
-        const url = new URL(inviteNext)
-        if (url.origin === window.location.origin) {
-          navigate(url.pathname + url.search, { replace: true })
-          return
-        }
-      } catch {
-        // Malformed URL — fall through to default redirect
-      }
-    }
+    authApi
+      .exchange(code)
+      .then(({ accessToken, user }) => {
+        setTokenAndUser(accessToken, user)
 
-    const dest = user?.onboardingCompleted ? "/dashboard" : "/onboarding"
-    navigate(dest, { replace: true })
-  }, [isLoading, isAuthenticated, user, navigate])
+        const inviteNext = sessionStorage.getItem("invite_next")
+        if (inviteNext) {
+          sessionStorage.removeItem("invite_next")
+          try {
+            const url = new URL(inviteNext)
+            if (url.origin === window.location.origin) {
+              navigate(url.pathname + url.search, { replace: true })
+              return
+            }
+          } catch {
+            // Malformed URL — fall through
+          }
+        }
+
+        navigate(user.onboardingCompleted ? "/dashboard" : "/onboarding", { replace: true })
+      })
+      .catch(() => {
+        navigate("/login?error=auth_failed", { replace: true })
+      })
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div

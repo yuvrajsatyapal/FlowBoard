@@ -20,6 +20,12 @@ export const authApi = {
     return res.data
   },
 
+  // Exchange one-time OAuth code for tokens — sets httpOnly cookie via POST response
+  async exchange(code: string): Promise<RefreshResponse> {
+    const res = await api.post<RefreshResponse>("/auth/exchange", { code })
+    return res.data
+  },
+
   async logout(): Promise<void> {
     await api.post("/auth/logout")
   },

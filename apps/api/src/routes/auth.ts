@@ -47,21 +47,63 @@ router.get(
       const user = req.user as Pick<User, "id" | "email">
       const { accessToken, refreshToken, jti } = issueTokens(user)
 
-      // Write session and refresh tokens sequentially to avoid partial-write inconsistency
       await redis.set(redisKeys.session(user.id), accessToken, { ex: ACCESS_TOKEN_TTL_SECONDS })
       await redis.set(redisKeys.refresh(jti), user.id, { ex: REFRESH_TOKEN_TTL_SECONDS })
 
-      res.cookie(REFRESH_COOKIE, refreshToken, COOKIE_OPTIONS)
-      // Redirect without the access token in the URL — the httpOnly cookie is already set.
-      // The SPA's AuthCallbackPage will call /api/auth/refresh to retrieve the access token
-      // and user profile via the cookie, keeping the token out of browser history and logs.
-      res.redirect(`${env.APP_URL}/auth/callback`)
+      // Store tokens under a short-lived one-time code instead of setting the cookie
+      // in this 302 redirect response — proxies (Vercel) strip Set-Cookie from redirects.
+      // The SPA exchanges the code via POST /api/auth/exchange, which properly sets the cookie.
+      const code = crypto.randomUUID()
+      await redis.set(`oauth_code:${code}`, JSON.stringify({ refreshToken, jti, userId: user.id }), { ex: 60 })
+
+      res.redirect(`${env.APP_URL}/auth/callback?code=${code}`)
     } catch (err) {
       logger.warn("OAuth callback error", { error: err instanceof Error ? err.message : err })
       res.redirect(`${env.APP_URL}/login?error=server_error`)
     }
   }
 )
+
+// POST /api/auth/exchange — exchange one-time OAuth code for tokens (sets httpOnly cookie)
+router.post("/exchange", authRateLimit, async (req, res) => {
+  const { code } = req.body as { code?: string }
+  if (!code) {
+    res.status(400).json({ error: { message: "Missing code", status: 400 } })
+    return
+  }
+
+  try {
+    const raw = await redis.get<string>(`oauth_code:${code}`)
+    if (!raw) {
+      res.status(401).json({ error: { message: "Invalid or expired code", status: 401 } })
+      return
+    }
+
+    await redis.del(`oauth_code:${code}`)
+    const { refreshToken, userId } = JSON.parse(raw) as { refreshToken: string; jti: string; userId: string }
+
+    const user = await prisma.user.findUnique({ where: { id: userId } })
+    if (!user) {
+      res.status(401).json({ error: { message: "User not found", status: 401 } })
+      return
+    }
+
+    res.cookie(REFRESH_COOKIE, refreshToken, COOKIE_OPTIONS)
+    res.json({
+      accessToken: await redis.get<string>(redisKeys.session(userId)) ?? "",
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        avatarUrl: user.avatarUrl,
+        onboardingCompleted: user.onboardingCompleted,
+      },
+    })
+  } catch (err) {
+    logger.warn("Code exchange failed", { error: err instanceof Error ? err.message : err })
+    res.status(401).json({ error: { message: "Code exchange failed", status: 401 } })
+  }
+})
 
 // POST /api/auth/refresh — exchange httpOnly cookie for new access token
 router.post("/refresh", authRateLimit, async (req, res) => {
