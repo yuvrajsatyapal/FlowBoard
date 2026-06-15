@@ -674,21 +674,24 @@ sequenceDiagram
     API->>DB: Upsert User + OAuthAccount
     API->>Redis: SET session:{userId} accessToken (15 min TTL)
     API->>Redis: SET refresh:{jti} userId (7 day TTL)
-    API-->>Browser: Set-Cookie: fg_refresh=<jwt> (httpOnly)
-    API-->>Browser: Redirect to /auth/callback
-    SPA->>API: POST /api/auth/refresh (cookie sent automatically)
-    API->>Redis: GET refresh:{jti} → userId
+    API->>Redis: SET oauth_code:{code} {refreshToken, userId} (60s TTL)
+    API-->>Browser: Redirect to /auth/callback?code={code}
+    SPA->>API: POST /api/auth/exchange { code }
+    API->>Redis: GET oauth_code:{code} → tokens (then DEL)
     API->>DB: GET User by id
-    API->>Redis: DEL refresh:{jti} (rotate — old token is now invalid)
-    API->>Redis: SET refresh:{newJti} userId
+    API-->>Browser: Set-Cookie: fg_refresh=<jwt> (httpOnly)
     API-->>SPA: { accessToken, user }
     SPA->>SPA: Store accessToken in memory only
     Note over SPA: All subsequent requests use<br/>Authorization: Bearer accessToken
+    Note over SPA: On reload, POST /api/auth/refresh<br/>uses the cookie to rotate + re-issue tokens
 ```
+
+> **Why a one-time code instead of setting the cookie in the redirect?** When the frontend (Vercel) proxies `/api` to a separate backend (Render), the proxy strips `Set-Cookie` headers from 3xx redirect responses. The callback therefore stashes the tokens under a short-lived code and the SPA exchanges it via a normal `POST`, whose response *does* carry `Set-Cookie` through the proxy.
 
 **Token lifecycle:**
 - Access token: **15 minutes**, stored in memory (never in `localStorage`)
-- Refresh token: **7 days**, HTTP-only `SameSite=Lax` cookie — inaccessible to JavaScript
+- Refresh token: **7 days**, HTTP-only cookie — `SameSite=None; Secure` in production (cross-site safe), `SameSite=Lax` in development — inaccessible to JavaScript
+- One-time OAuth code: **60 seconds**, single-use, deleted on first exchange
 - Rotation: every `/refresh` call invalidates the old refresh JTI and issues a new pair
 - Logout: both Redis keys are deleted; cookie is cleared immediately
 
@@ -814,8 +817,9 @@ All endpoints are prefixed with `/api`. JWT required on all routes except `/api/
 | Method | Path | Description |
 |---|---|---|
 | `GET` | `/google` | Initiate Google OAuth flow |
-| `GET` | `/google/callback` | OAuth callback — issue tokens, set cookie |
-| `POST` | `/refresh` | Exchange httpOnly cookie for new access token |
+| `GET` | `/google/callback` | OAuth callback — issue tokens, redirect with one-time code |
+| `POST` | `/exchange` | Exchange one-time OAuth code for tokens + set httpOnly cookie |
+| `POST` | `/refresh` | Rotate the httpOnly cookie for a new access token |
 | `POST` | `/logout` | Revoke session + clear cookie |
 
 ### Users — `/api/users`
@@ -1003,7 +1007,8 @@ All endpoints are prefixed with `/api`. JWT required on all routes except `/api/
 
 | Variable | Required | Default | Description |
 |---|---|---|---|
-| `VITE_API_BASE_URL` | — | `""` | API base URL. Empty string = relative `/api` path (proxied via nginx). Set to `https://api.yourdomain.com` for separate API domain in production. |
+| `VITE_API_BASE_URL` | — | `""` | API base URL. Empty = relative `/api` path (proxied via nginx or `vercel.json` — same-origin, keeps the auth cookie first-party). Set to `https://api.yourdomain.com` only for a separate API domain (Option C). |
+| `VITE_SOCKET_URL` | — | `""` | Socket.IO server URL. Empty = same origin (dev/proxied). Set to the backend URL directly in split deployments — WebSockets bypass the HTTP proxy. |
 
 ---
 
@@ -1079,7 +1084,40 @@ pnpm test         # Vitest (frontend unit tests)
 
 ## Production Deployment
 
-### Option A — Docker Compose (self-hosting)
+### Option A — Vercel (frontend) + Render (backend) + Neon (database)
+
+This is the live setup. The frontend is a static Vite SPA on Vercel; the backend (Express + Socket.IO) runs on Render because it needs persistent WebSocket connections, which serverless functions don't support.
+
+**Key idea:** Vercel proxies `/api/*` to Render so the browser sees a single origin. This keeps the auth cookie first-party (it would otherwise be blocked as a third-party cookie). WebSockets bypass the proxy and connect to Render directly.
+
+**1. Database — [Neon](https://neon.tech)**
+Create a project and copy the connection string → `DATABASE_URL`.
+
+**2. Backend — [Render](https://render.com) Web Service**
+| Setting | Value |
+|---|---|
+| Build Command | `npm install -g pnpm@9.4.0 && pnpm install --frozen-lockfile --prod=false && cd apps/api && npx prisma generate && npx tsc --build` |
+| Start Command | `cd apps/api && npx prisma migrate deploy && node dist/index.js` |
+
+Set env vars: all secrets from `.env.example` plus `NODE_ENV=production`, and point both `API_BASE_URL` and `APP_URL` at your **Vercel** URL (the OAuth callback and invite links resolve through the proxy). Set `CORS_ORIGIN` to the Vercel URL too.
+
+**3. Frontend — [Vercel](https://vercel.com)**
+| Setting | Value |
+|---|---|
+| Root Directory | `apps/web` |
+| Build Command | `cd ../.. && npm install -g pnpm@9.4.0 && pnpm install --frozen-lockfile && pnpm --filter @flowboard/web build` |
+| Output Directory | `dist` |
+
+`apps/web/vercel.json` rewrites `/api/*` to the Render URL and serves `index.html` for SPA routes. Env vars:
+- `VITE_API_BASE_URL` — **leave unset** so the app uses the relative `/api` path (same-origin via the proxy)
+- `VITE_SOCKET_URL` — set to the Render URL directly (WebSockets can't use the proxy)
+
+**4. Google OAuth**
+In Google Cloud Console add the **Vercel** URL as an Authorized JavaScript origin and `https://<your-vercel-url>/api/auth/google/callback` as an Authorized redirect URI.
+
+> **Note:** Render's free tier spins down after ~15 min of inactivity; the first request then takes 30–50s to cold-start.
+
+### Option B — Docker Compose (self-hosting)
 
 ```bash
 # 1. Clone and configure
@@ -1102,7 +1140,9 @@ Services exposed:
 | API (Node.js) | 3001 |
 | PostgreSQL | 5432 |
 
-### Option B — Separate Deployments
+### Option C — Separate Deployments (API on its own domain)
+
+Use this when the API has its own public domain (e.g. `api.yourdomain.com`) instead of being proxied. Requires the cookie to be `SameSite=None; Secure` (already the default in production) and a matching `CORS_ORIGIN`.
 
 **API:**
 ```bash
@@ -1119,9 +1159,12 @@ NODE_ENV=production node apps/api/dist/index.js
 **Web (static):**
 ```bash
 VITE_API_BASE_URL=https://api.yourdomain.com \
+VITE_SOCKET_URL=https://api.yourdomain.com \
   pnpm --filter @flowboard/web build
 # Deploy apps/web/dist/ to Vercel, Netlify, S3+CloudFront, or nginx
 ```
+
+> Browsers like Safari and Brave block third-party cookies by default, which can break auth across separate domains. Prefer the proxy approach (Option A) unless both domains share a parent (e.g. `app.` and `api.` of the same site).
 
 ### Production Environment Requirements
 
