@@ -1,7 +1,7 @@
 # Plan: Database Schema & Prisma Models
 
 **Spec**: .planning/specs/02-database-schema-and-prisma-models.md
-**Epic**: FlowGrid — Production-Grade Project Management SaaS
+**Epic**: FlowBoard — Production-Grade Project Management SaaS
 **Created**: 2026-05-31
 **Status**: draft
 
@@ -87,8 +87,8 @@ All downstream features build on top of this. Nothing builds on top of this feat
 
 | # | Task | File(s) | Test |
 |---|------|---------|------|
-| 9 | Replace `packages/types/src/index.ts` placeholder with TypeScript interfaces for all 15 models + 3 enum types | `packages/types/src/index.ts` | `pnpm --filter @flowgrid/types typecheck` passes |
-| 10 | Verify `@flowgrid/types` imports compile in `apps/api` | Run `pnpm --filter api typecheck` | No errors on `import type { User, Card } from '@flowgrid/types'` |
+| 9 | Replace `packages/types/src/index.ts` placeholder with TypeScript interfaces for all 15 models + 3 enum types | `packages/types/src/index.ts` | `pnpm --filter @flowboard/types typecheck` passes |
+| 10 | Verify `@flowboard/types` imports compile in `apps/api` | Run `pnpm --filter api typecheck` | No errors on `import type { User, Card } from '@flowboard/types'` |
 
 ### Phase 4: Verification (depends on Phase 2 + 3)
 
@@ -209,7 +209,7 @@ All tests for this feature are migration/toolchain tests — no unit tests neede
 | Migration runs | `pnpm --filter api prisma:migrate` | All 15 tables created |
 | Client generates | `pnpm --filter api prisma:generate` | Exit 0 |
 | API typecheck | `pnpm --filter api typecheck` | No TS errors |
-| Types typecheck | `pnpm --filter @flowgrid/types typecheck` | No TS errors |
+| Types typecheck | `pnpm --filter @flowboard/types typecheck` | No TS errors |
 | Full monorepo typecheck | `pnpm typecheck` (from root) | No TS errors |
 | Health endpoint | `curl http://localhost:3001/api/health` | `{ "status": "ok" }` |
 | Schema edge cases | Prisma Studio / psql manual verification | Soft-delete fields present; position is TEXT not FLOAT; Activity has no updated_at |

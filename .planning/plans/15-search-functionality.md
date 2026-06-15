@@ -1,7 +1,7 @@
 # Implementation Plan: Search Functionality (#15)
 
 **Spec**: .planning/specs/15-search-functionality.md
-**Epic**: flowgrid-saas (Phase 4)
+**Epic**: flowboard-saas (Phase 4)
 **Created**: 2026-06-01
 **Status**: draft
 
@@ -123,7 +123,7 @@ export interface SearchResponse {
 ```
 
 **What to test after this task:**
-- `pnpm --filter @flowgrid/types build` (or typecheck) passes with no errors
+- `pnpm --filter @flowboard/types build` (or typecheck) passes with no errors
 
 ---
 
@@ -239,7 +239,7 @@ const fallbackCards = await prisma.card.findMany({
 **`searchApi` (Task 5):**
 ```typescript
 import { api } from '../lib/axiosInstance'
-import type { SearchResponse } from '@flowgrid/types'
+import type { SearchResponse } from '@flowboard/types'
 
 export const searchApi = {
   async search(q: string, workspaceId: string, limit = 20, offset = 0): Promise<SearchResponse> {
@@ -255,7 +255,7 @@ export const searchApi = {
 - `query` state — controlled by input
 - Fires API call after 300ms debounce when `query.trim().length >= 2`
 - Sets `isLoading`, `results`, `error` state
-- On successful search: prepend to `recentSearches` in localStorage (key: `flowgrid:recent-searches`, max 5 unique entries)
+- On successful search: prepend to `recentSearches` in localStorage (key: `flowboard:recent-searches`, max 5 unique entries)
 - Exposes: `{ query, setQuery, results, isLoading, error, recentSearches }`
 
 **What to test after Task 5+6:**
@@ -400,7 +400,7 @@ Keyboard nav:
 ### Frontend Hook + API
 - `useSearch` with query "ab": API call fires after 300ms
 - `useSearch` with query "a": no API call (length < 2)
-- Successful search → query added to localStorage under `flowgrid:recent-searches`
+- Successful search → query added to localStorage under `flowboard:recent-searches`
 - localStorage never exceeds 5 entries (oldest dropped)
 - Duplicate query not added twice to recent searches
 

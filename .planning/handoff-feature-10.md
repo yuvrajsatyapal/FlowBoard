@@ -1,5 +1,5 @@
-# FlowGrid — Handoff Document
-**Date**: 2026-06-01 | **Repo**: `/Users/yuvrajsatyapal/Desktop/FlowGrid` | **Branch**: `main`
+# FlowBoard — Handoff Document
+**Date**: 2026-06-01 | **Repo**: `/Users/yuvrajsatyapal/Desktop/FlowBoard` | **Branch**: `main`
 ---
 ## Feature #9 — DONE ✅
 

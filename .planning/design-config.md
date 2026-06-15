@@ -1,4 +1,4 @@
-# FlowGrid Design Config
+# FlowBoard Design Config
 
 > Read by Hallmark before generating any UI. This is the locked design brief for the project.
 
@@ -6,7 +6,7 @@
 
 ## Product
 
-**Name:** FlowGrid
+**Name:** FlowBoard
 **Type:** B2B SaaS — Project Management
 **Genre:** modern-minimal (Stripe / Linear / ElevenLabs school)
 **Audience:** Startup teams and indie developers who live in their tools — they've used Jira, Notion, and Trello. They want speed, visual clarity, and keyboard-first power.
@@ -81,7 +81,7 @@ OKLCH palette to be constructed by Hallmark at build time. No purple-on-white gr
 
 ## Hallmark Instructions
 
-When invoking Hallmark for any FlowGrid screen:
+When invoking Hallmark for any FlowBoard screen:
 1. Read this file first — genre is **modern-minimal**
 2. Theme cluster: Quiet, Plume, Studio are closest — rotate among them
 3. Macrostructure: **Workbench** for dashboard/app screens; **Bento Grid** for landing; **Long Document** for settings

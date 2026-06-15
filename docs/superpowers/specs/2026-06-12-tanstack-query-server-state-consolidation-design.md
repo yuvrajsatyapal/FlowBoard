@@ -9,7 +9,7 @@
 
 ## 0. Context & Goal
 
-FlowGrid is a Trello/Jira-style collaborative project-management SPA.
+FlowBoard is a Trello/Jira-style collaborative project-management SPA.
 
 - **Frontend:** Vite + React 18 + React Router 6 + TypeScript (`apps/web`). *(Not Next.js — pure client SPA, so TanStack Query is unambiguously correct with no SSR/RSC caveats.)*
 - **Backend:** Express + Prisma + PostgreSQL + Socket.IO + Upstash Redis (`apps/api`).

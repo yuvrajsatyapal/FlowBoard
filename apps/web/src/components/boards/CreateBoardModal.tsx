@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react"
 import { motion } from "framer-motion"
-import type { BoardVisibility } from "@flowgrid/types"
+import type { BoardVisibility } from "@flowboard/types"
 import { boardsApi, type BoardSummary } from "../../api/boards"
 import { workspacesApi } from "../../api/workspaces"
 import { getInitials, getAvatarBg } from "../../utils/avatar"

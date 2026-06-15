@@ -3,7 +3,7 @@
 **Created**: 2026-06-01
 **Status**: draft
 **Author**: team
-**Epic**: FlowGrid SaaS — 20 Features
+**Epic**: FlowBoard SaaS — 20 Features
 
 ---
 

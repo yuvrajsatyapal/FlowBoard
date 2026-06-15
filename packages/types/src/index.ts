@@ -1,4 +1,4 @@
-// Shared FlowGrid types — mirrors prisma/schema.prisma
+// Shared FlowBoard types — mirrors prisma/schema.prisma
 // Plain TypeScript interfaces (no Prisma import) so apps/web can safely use them.
 // Optional fields use `T | null` to match Prisma's output convention.
 

@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: flowgrid
+      POSTGRES_DB: flowboard
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -33,7 +33,7 @@ services:
         required: false
     environment:
       # Always override DATABASE_URL to point at the local postgres service.
-      DATABASE_URL: postgresql://postgres:password@postgres:5432/flowgrid
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/flowboard
       NODE_ENV: production
     depends_on:
       postgres:

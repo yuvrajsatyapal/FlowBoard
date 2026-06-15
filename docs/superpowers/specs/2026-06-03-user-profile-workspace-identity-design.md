@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-03  
 **Status:** Approved  
-**Scope:** Two new features added to FlowGrid's settings surface
+**Scope:** Two new features added to FlowBoard's settings surface
 
 ---
 

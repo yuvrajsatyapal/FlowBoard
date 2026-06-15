@@ -3,7 +3,7 @@
 **Created**: 2026-06-01
 **Status**: draft
 **Author**: team
-**Epic**: flowgrid-saas.md (#14)
+**Epic**: flowboard-saas.md (#14)
 
 ---
 

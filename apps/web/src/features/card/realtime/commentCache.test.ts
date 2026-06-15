@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest"
 import { applyCommentUpsert, applyCommentRemove } from "./commentCache"
 import type { CommentPage } from "../../../api/comments"
-import type { CommentResponse } from "@flowgrid/types"
+import type { CommentResponse } from "@flowboard/types"
 
 const comment = (id: string, updatedAt: string, content = ""): CommentResponse => ({
   id,

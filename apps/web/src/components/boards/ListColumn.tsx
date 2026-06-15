@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 import { useDroppable } from "@dnd-kit/core"
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
-import { MAX_CARDS_PER_LIST } from "@flowgrid/types"
+import { MAX_CARDS_PER_LIST } from "@flowboard/types"
 import type { ListSummary } from "../../api/lists"
 import type { CardSummary } from "../../api/cards"
 import { useRenameList } from "../../features/board/mutations/useRenameList"

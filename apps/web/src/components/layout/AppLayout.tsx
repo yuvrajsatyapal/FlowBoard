@@ -274,7 +274,7 @@ function SidebarContent({
               color: "oklch(var(--color-ink))",
             }}
           >
-            FlowGrid
+            FlowBoard
           </span>
         </div>
       )}
@@ -673,7 +673,7 @@ export default function AppLayout() {
                     <rect x="22" y="8" width="10" height="16" rx="2" fill="white" opacity="0.6" />
                   </svg>
                   <span style={{ fontSize: "var(--text-sm)", fontWeight: 500, letterSpacing: "0.03em", fontFamily: "var(--font-display)", color: "oklch(var(--color-ink))" }}>
-                    FlowGrid
+                    FlowBoard
                   </span>
                 </div>
                 <button

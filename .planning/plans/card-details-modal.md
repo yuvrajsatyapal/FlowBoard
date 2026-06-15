@@ -1,7 +1,7 @@
 # Plan: Card Details Modal
 
 **Spec**: .planning/specs/card-details-modal.md
-**Epic**: FlowGrid SaaS (#10b)
+**Epic**: FlowBoard SaaS (#10b)
 **Created**: 2026-06-01
 **Status**: draft
 

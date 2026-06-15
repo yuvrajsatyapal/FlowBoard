@@ -87,7 +87,7 @@ export default function LoginPage() {
             <rect x="22" y="8" width="10" height="16" rx="2" fill="white" opacity="0.6" />
           </svg>
           <span style={{ fontSize: "1.25rem", fontWeight: 600, letterSpacing: "-0.02em", fontFamily: "var(--font-display)" }}>
-            FlowGrid
+            FlowBoard
           </span>
         </div>
 

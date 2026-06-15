@@ -3,13 +3,13 @@
 **Created**: 2026-05-31
 **Status**: draft
 **Author**: team
-**Epic**: flowgrid-saas (Feature #1)
+**Epic**: flowboard-saas (Feature #1)
 
 ---
 
 ## Problem
 
-Starting FlowGrid development requires a clean, production-grade monorepo where the frontend (React/Vite) and backend (Node.js/Express) share TypeScript types, have consistent tooling, and can be run together in development with a single command. Without this foundation, every subsequent feature risks inconsistency in tooling, type drift between frontend and backend, and slow developer experience.
+Starting FlowBoard development requires a clean, production-grade monorepo where the frontend (React/Vite) and backend (Node.js/Express) share TypeScript types, have consistent tooling, and can be run together in development with a single command. Without this foundation, every subsequent feature risks inconsistency in tooling, type drift between frontend and backend, and slow developer experience.
 
 ---
 
@@ -22,7 +22,7 @@ A fully wired monorepo where `pnpm dev` starts both apps, the frontend proxies A
 ## User Stories
 
 - **As a developer**, I can run `pnpm dev` from the root and have both the React frontend (port 5173) and Express API (port 3001) start with hot-reload, so I never have to manage multiple terminals for basic dev work.
-- **As a developer**, I can import `@flowgrid/types` in both `apps/web` and `apps/api` and get the same TypeScript types, so I never have frontend/backend type drift.
+- **As a developer**, I can import `@flowboard/types` in both `apps/web` and `apps/api` and get the same TypeScript types, so I never have frontend/backend type drift.
 - **As a developer**, I can add a `.env.local` with Upstash credentials and see `GET /health` return `{ status: "ok", redis: "connected" }`, confirming the Redis client works end-to-end.
 
 ---
@@ -66,7 +66,7 @@ A fully wired monorepo where `pnpm dev` starts both apps, the frontend proxies A
 ## Directory Structure
 
 ```
-flowgrid/
+flowboard/
 ├── apps/
 │   ├── web/
 │   │   ├── src/
@@ -157,7 +157,7 @@ No auth required. Used by deployment health checks.
 ### `apps/api/.env.example`
 ```
 # Database
-DATABASE_URL="postgresql://postgres:password@localhost:5432/flowgrid"
+DATABASE_URL="postgresql://postgres:password@localhost:5432/flowboard"
 
 # Upstash Redis
 UPSTASH_REDIS_REST_URL="https://your-instance.upstash.io"
@@ -211,7 +211,7 @@ server: {
 ```
 
 ### Hallmark Seed Tokens (`apps/web/src/styles/tokens.css`)
-Seed file with OKLCH-based variables matching the modern-minimal genre and FlowGrid design config. Includes `--color-paper`, `--color-ink`, `--color-accent`, `--font-display`, `--font-body`, `--font-mono`, spacing scale (`--space-xs` through `--space-2xl`), radius tokens, and duration/easing tokens. Tailwind's config will reference these via CSS variable consumption.
+Seed file with OKLCH-based variables matching the modern-minimal genre and FlowBoard design config. Includes `--color-paper`, `--color-ink`, `--color-accent`, `--font-display`, `--font-body`, `--font-mono`, spacing scale (`--space-xs` through `--space-2xl`), radius tokens, and duration/easing tokens. Tailwind's config will reference these via CSS variable consumption.
 
 ### Turbo Pipeline (`turbo.json`)
 ```json
@@ -268,7 +268,7 @@ Models added in Feature #2.
 - [ ] `pnpm dev` starts both apps — web on 5173, api on 3001
 - [ ] `GET http://localhost:3001/api/health` returns `{ status: "ok", redis: "connected" }`
 - [ ] `curl http://localhost:5173/api/health` proxies through Vite and returns same response
-- [ ] `import type { ... } from "@flowgrid/types"` resolves in both apps without TS errors
+- [ ] `import type { ... } from "@flowboard/types"` resolves in both apps without TS errors
 - [ ] `pnpm build` from root builds all packages in correct dependency order via Turbo
 
 ### Edge Cases

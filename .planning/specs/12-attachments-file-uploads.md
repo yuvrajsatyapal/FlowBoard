@@ -3,7 +3,7 @@
 **Created**: 2026-06-01
 **Status**: draft
 **Author**: team
-**Epic**: flowgrid-saas
+**Epic**: flowboard-saas
 **Depends on**: #10 (Card Details Modal)
 
 ---
@@ -26,7 +26,7 @@ Files are stored durably (Cloudflare R2 in production, local disk in dev), linke
 the card in the database, and cleaned up automatically when the card is deleted.
 
 Success = a user opens a card, uploads a file, and a teammate immediately sees it in
-the attachment list and can download it — without leaving FlowGrid.
+the attachment list and can download it — without leaving FlowBoard.
 
 ---
 
@@ -73,7 +73,7 @@ the attachment list and can download it — without leaving FlowGrid.
 
 ### Out of Scope
 - Inline image embeds inside TipTap description editor
-- Video playback / media streaming inside FlowGrid
+- Video playback / media streaming inside FlowBoard
 - Versioned attachments (replace v1 with v2 with history)
 - Folder organization or attachment categories
 - Per-file granular upload progress bars (basic loading state is in scope)
@@ -256,7 +256,7 @@ STORAGE_PROVIDER=r2
 R2_ACCOUNT_ID=<cloudflare-account-id>
 R2_ACCESS_KEY_ID=<r2-access-key>
 R2_SECRET_ACCESS_KEY=<r2-secret-key>
-R2_BUCKET_NAME=flowgrid-attachments
+R2_BUCKET_NAME=flowboard-attachments
 R2_PUBLIC_DOMAIN=<pub.r2.dev domain or custom domain>
 ```
 

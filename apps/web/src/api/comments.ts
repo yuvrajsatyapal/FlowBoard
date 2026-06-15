@@ -1,5 +1,5 @@
 import { api } from "../lib/axiosInstance"
-import type { CommentResponse } from "@flowgrid/types"
+import type { CommentResponse } from "@flowboard/types"
 
 export interface CommentPage {
   items: CommentResponse[]

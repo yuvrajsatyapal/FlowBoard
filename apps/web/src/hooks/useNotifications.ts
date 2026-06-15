@@ -3,7 +3,7 @@ import { useInfiniteQuery, useQueryClient, type InfiniteData } from "@tanstack/r
 import { useAuth } from "../contexts/AuthContext"
 import { notificationsApi, type NotificationPage } from "../api/notifications"
 import { createBoardSocket } from "../lib/socket"
-import type { AppNotification } from "@flowgrid/types"
+import type { AppNotification } from "@flowboard/types"
 
 export const NOTIFICATIONS_KEY = ["notifications"] as const
 const PAGE_SIZE = 20

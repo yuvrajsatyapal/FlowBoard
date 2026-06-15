@@ -62,7 +62,7 @@ Follow the established codebase pattern (as used on `WorkspaceMembersPage` and `
 - At 375px (iPhone SE): no horizontal scroll anywhere; Export button fully visible and tappable; period dropdown opens anchored directly under its trigger (not detached); totals show as a 2×2 grid; donut and bar charts each render full-width, stacked.
 - At 640px and above: visually identical to the current desktop layout.
 - Resizing across the 640px boundary reflows live (the `useWindowWidth` hook listens to resize).
-- `pnpm --filter @flowgrid/web build` passes clean (no new TS/unused errors).
+- `pnpm --filter @flowboard/web build` passes clean (no new TS/unused errors).
 
 ## Verification note
 

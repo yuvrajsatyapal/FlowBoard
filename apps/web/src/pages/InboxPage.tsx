@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { boardsApi } from "../api/boards"
 import { invitesApi } from "../api/invites"
 import { useNotifications } from "../hooks/useNotifications"
-import type { AppNotification, NotificationType } from "@flowgrid/types"
+import type { AppNotification, NotificationType } from "@flowboard/types"
 
 // ── Icons ──────────────────────────────────────────────────────────────────────
 

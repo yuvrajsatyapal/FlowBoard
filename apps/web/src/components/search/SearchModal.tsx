@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import type { CardSearchResult } from "@flowgrid/types"
+import type { CardSearchResult } from "@flowboard/types"
 import { useSearch } from "../../hooks/useSearch"
 import { SearchResult } from "./SearchResult"
 

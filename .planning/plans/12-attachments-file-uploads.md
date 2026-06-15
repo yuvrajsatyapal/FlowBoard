@@ -1,7 +1,7 @@
 # Plan: Feature #12 — Attachments & File Uploads
 
 **Spec**: .planning/specs/12-attachments-file-uploads.md
-**Epic**: flowgrid-saas
+**Epic**: flowboard-saas
 **Created**: 2026-06-01
 **Status**: draft
 

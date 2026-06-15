@@ -1,5 +1,5 @@
 import { api } from "../lib/axiosInstance"
-import type { BoardVisibility, Priority, Role } from "@flowgrid/types"
+import type { BoardVisibility, Priority, Role } from "@flowboard/types"
 
 export interface CalendarCard {
   id: string

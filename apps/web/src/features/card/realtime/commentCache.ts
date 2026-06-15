@@ -1,6 +1,6 @@
 import { upsertById, removeById } from "../../../lib/cache/collection"
 import type { CommentPage } from "../../../api/comments"
-import type { CommentResponse } from "@flowgrid/types"
+import type { CommentResponse } from "@flowboard/types"
 
 /** Insert-or-update a comment in the page. Total only increments when the
  *  comment was not already present, so a mutation write and the socket echo

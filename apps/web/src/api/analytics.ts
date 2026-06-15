@@ -1,5 +1,5 @@
 import { api } from "../lib/axiosInstance"
-import type { AnalyticsData } from "@flowgrid/types"
+import type { AnalyticsData } from "@flowboard/types"
 
 export const analyticsApi = {
   async get(workspaceId: string, days: number = 30): Promise<AnalyticsData> {

@@ -1,7 +1,7 @@
 # Plan: Feature #13 — Real-time Collaboration (WebSockets)
 
 **Spec**: .planning/specs/13-realtime-collaboration-websockets.md
-**Epic**: FlowGrid SaaS — 20 Features
+**Epic**: FlowBoard SaaS — 20 Features
 **Created**: 2026-06-01
 **Status**: draft
 
@@ -132,7 +132,7 @@ import { env } from '../config/env'
 import { verifyAccessToken } from './jwt'
 import { redis, redisKeys } from './redis'
 import { prisma } from './prisma'
-import type { PresenceUser } from '@flowgrid/types'
+import type { PresenceUser } from '@flowboard/types'
 
 let io: Server
 
@@ -342,8 +342,8 @@ The socket connects to the same origin. Vite dev proxy handles `/socket.io/*` tr
 ```typescript
 import type { CardSummary } from '../api/cards'
 import type { ListSummary } from '../api/lists'
-import type { CommentResponse } from '@flowgrid/types'
-import type { PresenceUser } from '@flowgrid/types'
+import type { CommentResponse } from '@flowboard/types'
+import type { PresenceUser } from '@flowboard/types'
 
 interface BoardSocketHandlers {
   onCardCreated?: (card: CardSummary) => void

@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { searchApi } from "../api/search"
-import type { CardSearchResult } from "@flowgrid/types"
+import type { CardSearchResult } from "@flowboard/types"
 
-const RECENT_KEY = "flowgrid:recent-searches"
+const RECENT_KEY = "flowboard:recent-searches"
 const MAX_RECENT = 5
 const DEBOUNCE_MS = 300
 const MIN_QUERY_LENGTH = 2

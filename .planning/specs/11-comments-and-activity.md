@@ -3,7 +3,7 @@
 **Created**: 2026-06-01
 **Status**: draft
 **Author**: Yuvraj Satyapal
-**Epic**: flowgrid-saas.md
+**Epic**: flowboard-saas.md
 
 ---
 

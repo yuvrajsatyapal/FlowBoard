@@ -1,4 +1,4 @@
-# FlowGrid — Engineering Patterns
+# FlowBoard — Engineering Patterns
 
 ## 1. Async flush-before-close in debounced modals
 

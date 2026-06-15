@@ -24,14 +24,14 @@
 |---|---|---|
 | Pure cache primitives (`upsertById`, `removeById`, `reorderByIds`, version guard, key factories, presence reducer) | **TDD with Vitest** (unit) | Pure functions, deterministic, high-signal — the place TDD pays |
 | Query/mutation hooks | Typecheck + a thin RTL render test with a real `QueryClient` + mocked `api/*` module | Confirms wiring, cache keys, optimistic rollback |
-| Page migrations | **Behavioral parity**: `pnpm --filter @flowgrid/web typecheck` + `build` + existing Playwright flows + two-browser manual smoke for socket surfaces | Contract is "nothing observable changes" — parity beats brittle snapshot tests mid-refactor |
+| Page migrations | **Behavioral parity**: `pnpm --filter @flowboard/web typecheck` + `build` + existing Playwright flows + two-browser manual smoke for socket surfaces | Contract is "nothing observable changes" — parity beats brittle snapshot tests mid-refactor |
 
 **Per-phase global gate (must pass before any Checkpoint):**
 ```bash
-pnpm --filter @flowgrid/web typecheck
-pnpm --filter @flowgrid/web lint
-pnpm --filter @flowgrid/web build
-pnpm --filter @flowgrid/web test run   # available after Phase 0
+pnpm --filter @flowboard/web typecheck
+pnpm --filter @flowboard/web lint
+pnpm --filter @flowboard/web build
+pnpm --filter @flowboard/web test run   # available after Phase 0
 ```
 
 ---
@@ -57,7 +57,7 @@ pnpm --filter @flowgrid/web test run   # available after Phase 0
 
 Run from repo root:
 ```bash
-pnpm --filter @flowgrid/web add -D vitest@^2 @testing-library/react@^16 @testing-library/jest-dom@^6 jsdom@^25 @testing-library/user-event@^14
+pnpm --filter @flowboard/web add -D vitest@^2 @testing-library/react@^16 @testing-library/jest-dom@^6 jsdom@^25 @testing-library/user-event@^14
 ```
 
 - [ ] **Step 2: Add the test script**
@@ -99,7 +99,7 @@ describe("vitest", () => {
   it("runs", () => { expect(1 + 1).toBe(2) })
 })
 ```
-Run: `pnpm --filter @flowgrid/web test run`
+Run: `pnpm --filter @flowboard/web test run`
 Expected: 1 passed.
 
 - [ ] **Step 6: Delete the sanity file**
@@ -177,7 +177,7 @@ describe("reorderByIds", () => {
 
 - [ ] **Step 2: Run to verify it fails**
 
-Run: `pnpm --filter @flowgrid/web test run src/lib/cache/collection.test.ts`
+Run: `pnpm --filter @flowboard/web test run src/lib/cache/collection.test.ts`
 Expected: FAIL — "Failed to resolve import './collection'".
 
 - [ ] **Step 3: Implement `collection.ts`**
@@ -225,7 +225,7 @@ export function reorderByIds<T extends Identifiable>(list: T[], orderedIds: stri
 
 - [ ] **Step 4: Run to verify it passes**
 
-Run: `pnpm --filter @flowgrid/web test run src/lib/cache/collection.test.ts`
+Run: `pnpm --filter @flowboard/web test run src/lib/cache/collection.test.ts`
 Expected: PASS (all cases).
 
 - [ ] **Step 5: Checkpoint** — global gate green, stop for owner.
@@ -261,7 +261,7 @@ describe("boardKeys", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails** — `pnpm --filter @flowgrid/web test run src/features/board/queries/keys.test.ts` → FAIL (import).
+- [ ] **Step 2: Run to verify it fails** — `pnpm --filter @flowboard/web test run src/features/board/queries/keys.test.ts` → FAIL (import).
 
 - [ ] **Step 3: Implement the three factories**
 
@@ -335,9 +335,9 @@ export const queryClient = new QueryClient({
 })
 ```
 
-- [ ] **Step 2: Typecheck + build** — `pnpm --filter @flowgrid/web typecheck && pnpm --filter @flowgrid/web build` → PASS.
+- [ ] **Step 2: Typecheck + build** — `pnpm --filter @flowboard/web typecheck && pnpm --filter @flowboard/web build` → PASS.
 
-- [ ] **Step 3: Manual parity** — run `pnpm --filter @flowgrid/web dev`, open Inbox/notifications (existing Query consumers), confirm identical behavior; no console errors.
+- [ ] **Step 3: Manual parity** — run `pnpm --filter @flowboard/web dev`, open Inbox/notifications (existing Query consumers), confirm identical behavior; no console errors.
 
 - [ ] **Step 4: Checkpoint** — global gate green, stop for owner.
 
@@ -447,7 +447,7 @@ export function useRealtimeCacheSync(socket: Socket | null, handlers: Handlers):
 
 - [ ] **Step 6: Checkpoint** — global gate green, stop for owner.
 
-**Phase 0 success criteria:** test runner green; `src/lib/cache/*` and three key factories exist and are unit-tested; `queryClient` reconfigured; `pnpm --filter @flowgrid/web build` passes; **no page behavior changed** (verified by opening the app and exercising Inbox/notifications).
+**Phase 0 success criteria:** test runner green; `src/lib/cache/*` and three key factories exist and are unit-tested; `queryClient` reconfigured; `pnpm --filter @flowboard/web build` passes; **no page behavior changed** (verified by opening the app and exercising Inbox/notifications).
 
 ---
 
@@ -507,7 +507,7 @@ export function useWorkspaceInvites(workspaceId: string | undefined, canManage: 
 }
 ```
 
-- [ ] **Step 3: Typecheck** — `pnpm --filter @flowgrid/web typecheck` → PASS (hooks unused so far, but must compile).
+- [ ] **Step 3: Typecheck** — `pnpm --filter @flowboard/web typecheck` → PASS (hooks unused so far, but must compile).
 
 - [ ] **Step 4: Checkpoint** — gate green, stop for owner.
 
@@ -528,7 +528,7 @@ All are **pessimistic**: await the server, then write the result into cache via 
 
 ```ts
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import type { Role } from "@flowgrid/types"
+import type { Role } from "@flowboard/types"
 import { workspacesApi, type WorkspaceMember } from "../../../api/workspaces"
 import { workspaceKeys } from "../queries/keys"
 
@@ -570,7 +570,7 @@ export function useRemoveMember(workspaceId: string) {
 
 ```ts
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import type { Role } from "@flowgrid/types"
+import type { Role } from "@flowboard/types"
 import { invitesApi } from "../../../api/invites"
 import { workspaceKeys } from "../queries/keys"
 
@@ -753,11 +753,11 @@ const handleRevoke = async (inviteId: string) => {
 
 > The invite-search debounce `useEffect` (lines ~586–606) and `handleSelectUser`, `handleExport` stay unchanged — search remains a local ephemeral concern this phase (optional future: convert to `workspaceKeys.userSearch` query; **not now**, YAGNI).
 
-- [ ] **Step 4: Typecheck + lint** — `pnpm --filter @flowgrid/web typecheck && pnpm --filter @flowgrid/web lint`. Fix any unused-import / unused-variable errors (e.g. now-dead `useCallback`, `setMembers`). Expected: PASS, and the FRONTEND.md build-check rule (no leftover imports) satisfied.
+- [ ] **Step 4: Typecheck + lint** — `pnpm --filter @flowboard/web typecheck && pnpm --filter @flowboard/web lint`. Fix any unused-import / unused-variable errors (e.g. now-dead `useCallback`, `setMembers`). Expected: PASS, and the FRONTEND.md build-check rule (no leftover imports) satisfied.
 
-- [ ] **Step 5: Build** — `pnpm --filter @flowgrid/web build` → PASS.
+- [ ] **Step 5: Build** — `pnpm --filter @flowboard/web build` → PASS.
 
-- [ ] **Step 6: Behavioral parity (manual)** — `pnpm --filter @flowgrid/web dev`, then on the Members page verify, identical to before:
+- [ ] **Step 6: Behavioral parity (manual)** — `pnpm --filter @flowboard/web dev`, then on the Members page verify, identical to before:
   - members + invites load; loading and error states render the same;
   - change a role → persists, list updates, no flash;
   - remove a member → row disappears;
@@ -825,7 +825,7 @@ const handleRevoke = async (inviteId: string) => {
 - [ ] **Task 4.1** — Migrate `AllActivityPage`, `AllDeadlinesPage`, `DashboardPage`, `ProfilePage` (read-heavy leaves) to query hooks under their features. Validation: per-page parity.
 - [ ] **Task 4.2** — Migrate `WorkspaceSettingsPage`, `WorkspacePage`, `AnalyticsPage`; finish `InboxPage`. Validation: per-page parity.
 - [ ] **Task 4.3** — Move workspace *list* to `features/workspace/queries/useWorkspaceList.ts`; reduce `stores/workspaceStore.ts` to `{ activeWorkspaceId, setActiveWorkspaceId }` (selection only). Update consumers to read the list from the query and the selection from the store. Validation: workspace switcher parity; no server data left in the store.
-- [ ] **Task 4.4** — Add an ESLint rule (custom `no-restricted-syntax` or a small local rule) forbidding `api.*`/`*Api.*` calls inside `useEffect` within `apps/web/src/pages/**`. Land as `warn`, fix stragglers, promote to `error`. Validation: `pnpm --filter @flowgrid/web lint` green; `grep -rn "useEffect" src/pages` shows no data-fetch effects.
+- [ ] **Task 4.4** — Add an ESLint rule (custom `no-restricted-syntax` or a small local rule) forbidding `api.*`/`*Api.*` calls inside `useEffect` within `apps/web/src/pages/**`. Land as `warn`, fix stragglers, promote to `error`. Validation: `pnpm --filter @flowboard/web lint` green; `grep -rn "useEffect" src/pages` shows no data-fetch effects.
 - [ ] **Checkpoint after each task** — gate green; stop for owner.
 
 **Phase 4 success criteria:** no `useEffect`+axios data fetch remains in `pages/`; Zustand holds only client selections; lint gate enforces the pattern; all gates green; UI identical throughout.

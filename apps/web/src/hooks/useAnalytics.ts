@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { analyticsApi } from "../api/analytics"
-import type { AnalyticsData } from "@flowgrid/types"
+import type { AnalyticsData } from "@flowboard/types"
 
 export function useAnalytics(workspaceId: string | undefined, days: number = 30) {
   return useQuery<AnalyticsData>({

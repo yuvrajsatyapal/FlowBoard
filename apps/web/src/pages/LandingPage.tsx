@@ -38,13 +38,13 @@ const C = mkPalette(false)
 
 /* ─── data ─────────────────────────────────────────────────────────────────── */
 const HERO_CARDS = [
-  { num: '01', label: 'Boards',    bg: C.cream,    textDark: true,  code: 'FG-BORD-01',
+  { num: '01', label: 'Boards',    bg: C.cream,    textDark: true,  code: 'FB-BORD-01',
     icon: <><rect x="7" y="7" width="4" height="4"/><rect x="13" y="7" width="4" height="4"/><rect x="7" y="13" width="4" height="4"/><rect x="13" y="13" width="4" height="4"/></> },
-  { num: '02', label: 'Timeline',  bg: C.coral,    textDark: false, code: 'FG-TMLN-02',
+  { num: '02', label: 'Timeline',  bg: C.coral,    textDark: false, code: 'FB-TMLN-02',
     icon: <><rect x="6" y="8" width="12" height="2.5"/><rect x="6" y="12.5" width="9" height="2.5"/><rect x="6" y="17" width="6" height="2.5"/></> },
-  { num: '03', label: 'Analytics', bg: C.tealCard, textDark: false, code: 'FG-ANLT-03',
+  { num: '03', label: 'Analytics', bg: C.tealCard, textDark: false, code: 'FB-ANLT-03',
     icon: <><rect x="6" y="14" width="3" height="6"/><rect x="11" y="10" width="3" height="10"/><rect x="16" y="6" width="3" height="14"/></> },
-  { num: '04', label: 'Real-time', bg: C.blush,    textDark: true,  code: 'FG-RLTM-04',
+  { num: '04', label: 'Real-time', bg: C.blush,    textDark: true,  code: 'FB-RLTM-04',
     icon: <polyline points="5,16 9,10 13,14 17,6 19,10" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/> },
 ]
 
@@ -84,12 +84,12 @@ const FEATURES = [
 ]
 
 const FAQ_ITEMS = [
-  { q: 'How is FlowGrid different from others?',
-    a: "FlowGrid combines multi-dimensional planning, intelligent task relationships, real-time collaboration, and built-in analytics in a workspace designed for fast-moving teams." },
+  { q: 'How is FlowBoard different from others?',
+    a: "FlowBoard combines multi-dimensional planning, intelligent task relationships, real-time collaboration, and built-in analytics in a workspace designed for fast-moving teams." },
   { q: 'Is collaboration really real-time?',
-    a: 'Yes. FlowGrid keeps everyone in sync as work happens. Board updates, task changes, and team activity appear instantly across the workspace, so everyone stays on the same page without refreshing.' },
+    a: 'Yes. FlowBoard keeps everyone in sync as work happens. Board updates, task changes, and team activity appear instantly across the workspace, so everyone stays on the same page without refreshing.' },
   { q: 'Can we migrate from other tools?',
-    a: 'Not currently. FlowGrid is focused on delivering a powerful project management experience, and migration tools are being considered for future releases.' },
+    a: 'Not currently. FlowBoard is focused on delivering a powerful project management experience, and migration tools are being considered for future releases.' },
   { q: 'What is the typical setup time?',
     a: 'Setup takes less than 2 minutes. Create a workspace, set up your first board, and start collaborating right away.' },
   { q: 'What happens after we sign up?',
@@ -210,8 +210,8 @@ function LandingNav({ scrolled }: { scrolled: boolean }) {
     }}>
       <div style={{ maxWidth: '100rem', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}
            className="px-4 sm:px-6 md:px-8 py-3.5 sm:py-5 md:py-6">
-        <a href="/" aria-label="FlowGrid home" style={{ fontFamily: "'Anton', sans-serif", fontSize: 22, letterSpacing: '0.02em', color: P.text, textDecoration: 'none', flexShrink: 0 }}>
-          FlowGrid
+        <a href="/" aria-label="FlowBoard home" style={{ fontFamily: "'Anton', sans-serif", fontSize: 22, letterSpacing: '0.02em', color: P.text, textDecoration: 'none', flexShrink: 0 }}>
+          FlowBoard
         </a>
 
         {/* Desktop-only: Features + FAQs links */}
@@ -343,7 +343,7 @@ function HeroSection({ time }: { time: string }) {
                     <span style={{ width: 7, height: 7, background: card.textDark ? 'rgba(28,27,27,0.7)' : 'rgba(255,255,255,0.7)', display: 'inline-block' }} />
                     <span style={{ fontFamily: 'monospace' }}>{card.code}</span>
                   </span>
-                  <span>FG</span>
+                  <span>FB</span>
                 </div>
               </div>
               </div>{/* /lp-float-card */}
@@ -369,14 +369,14 @@ function HeroSection({ time }: { time: string }) {
 }
 
 /* ─── WHAT IS FLOWGRID ──────────────────────────────────────────────────────── */
-function WhatIsFlowGrid() {
+function WhatIsFlowBoard() {
   const { isDark } = useTheme()
   const P = mkPalette(isDark)
   return (
     <section style={{ padding: 'clamp(80px, 10vw, 144px) clamp(24px, 5vw, 64px)', background: P.bg, maxWidth: '100rem', margin: '0 auto' }}>
-      <p className="lp-label lp-reveal" style={{ marginBottom: 20 }}>What is FlowGrid</p>
+      <p className="lp-label lp-reveal" style={{ marginBottom: 20 }}>What is FlowBoard</p>
       <div style={{ maxWidth: '85%' }}>
-        <ScrollRevealText text="FlowGrid is where your team's work lives. We stripped away the noise to build a platform that prioritises clarity over complexity. Designed for high-performance teams who need to move from ideation to delivery without the typical friction of legacy tools." />
+        <ScrollRevealText text="FlowBoard is where your team's work lives. We stripped away the noise to build a platform that prioritises clarity over complexity. Designed for high-performance teams who need to move from ideation to delivery without the typical friction of legacy tools." />
       </div>
     </section>
   )
@@ -585,9 +585,9 @@ function FeaturesSection() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: mutedTc }}>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                       <span style={{ width: 9, height: 9, background: feat.textLight ? 'rgba(255,255,255,0.7)' : 'rgba(28,27,27,0.7)', display: 'inline-block' }} />
-                      <span style={{ fontFamily: 'monospace' }}>FG-24</span>
+                      <span style={{ fontFamily: 'monospace' }}>FB-24</span>
                     </span>
-                    <span>FG</span>
+                    <span>FB</span>
                   </div>
                 </div>
 
@@ -645,7 +645,7 @@ function FAQSection() {
         <div className="lp-reveal lg:sticky lg:top-20 lg:self-start">
           <p className="lp-label" style={{ marginBottom: 16 }}>Frequently asked questions</p>
           <h2 style={{ fontFamily: "'Anton', sans-serif", fontSize: 'clamp(44px,7vw,68px)', lineHeight: 1, maxWidth: '12ch', color: P.text }}>
-            What teams ask before switching to FlowGrid.
+            What teams ask before switching to FlowBoard.
           </h2>
           <p style={{ marginTop: 20, maxWidth: '48ch', fontFamily: "'Hanken Grotesk'", fontSize: 16, lineHeight: 1.7, color: P.muted }}>
             Short answers on collaboration, migration, setup, and what happens after you sign up.
@@ -729,7 +729,7 @@ function Footer() {
     <footer style={{ background: C.dark, borderTop: '1px solid rgba(255,255,255,0.08)', padding: '24px clamp(24px,5vw,64px) 20px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
         <a href="/" style={{ fontFamily: "'Anton', sans-serif", fontSize: 18, color: '#fff', textDecoration: 'none', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-          FlowGrid
+          FlowBoard
         </a>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(6px, 2vw, 12px)' }}>
           <span style={{ fontFamily: "'Hanken Grotesk'", fontSize: 'clamp(8px, 2vw, 10px)', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginRight: 'clamp(2px, 1vw, 4px)' }}>Connect</span>
@@ -780,7 +780,7 @@ export default function LandingPage() {
       <div style={{ background: P.bg, color: P.text, overflowX: 'clip', transition: 'background 0.3s, color 0.3s' }}>
         <LandingNav scrolled={scrolled} />
         <HeroSection time={time} />
-        <WhatIsFlowGrid />
+        <WhatIsFlowBoard />
         <ProcessSection />
         <BoldStatement />
         <FeaturesSection />

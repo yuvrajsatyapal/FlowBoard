@@ -27,7 +27,7 @@ async function main() {
   // User
   const user = await prisma.user.create({
     data: {
-      email: "dev@flowgrid.local",
+      email: "dev@flowboard.local",
       name: "Dev User",
       avatarUrl: null,
     },
@@ -36,8 +36,8 @@ async function main() {
   // Organization
   const org = await prisma.organization.create({
     data: {
-      name: "FlowGrid Dev",
-      slug: "flowgrid-dev",
+      name: "FlowBoard Dev",
+      slug: "flowboard-dev",
       ownerId: user.id,
     },
   })

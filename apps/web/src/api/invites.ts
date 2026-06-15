@@ -1,5 +1,5 @@
 import { api } from "../lib/axiosInstance"
-import type { Role } from "@flowgrid/types"
+import type { Role } from "@flowboard/types"
 
 export interface WorkspaceInviteRecord {
   id: string

@@ -1,7 +1,7 @@
 # Plan: Feature #14 — Notifications System
 
 **Spec**: .planning/specs/14-notifications-system.md
-**Epic**: flowgrid-saas.md (#14)
+**Epic**: flowboard-saas.md (#14)
 **Created**: 2026-06-01
 **Status**: draft
 **Stack**: Full-stack (Node/Express + React/Vite)

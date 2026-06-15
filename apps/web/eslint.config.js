@@ -1,4 +1,4 @@
-import config from "@flowgrid/eslint-config"
+import config from "@flowboard/eslint-config"
 
 /**
  * React Query guardrail.

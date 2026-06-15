@@ -3,7 +3,7 @@
 **Created**: 2026-06-01
 **Status**: draft
 **Author**: team
-**Epic**: FlowGrid SaaS (#10b — follows #10a Card Face)
+**Epic**: FlowBoard SaaS (#10b — follows #10a Card Face)
 **Depends on**: Feature #10a (done), Feature #9 (done)
 
 ---

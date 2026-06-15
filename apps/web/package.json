@@ -1,5 +1,5 @@
 {
-  "name": "@flowgrid/web",
+  "name": "@flowboard/web",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -15,7 +15,7 @@
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
-    "@flowgrid/types": "workspace:*",
+    "@flowboard/types": "workspace:*",
     "@tanstack/react-query": "^5.45.1",
     "@tanstack/react-query-devtools": "^5.45.1",
     "@tiptap/extension-placeholder": "^3.24.0",
@@ -36,7 +36,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
-    "@flowgrid/eslint-config": "workspace:*",
+    "@flowboard/eslint-config": "workspace:*",
     "@testing-library/jest-dom": "^6",
     "@testing-library/react": "^16",
     "@testing-library/user-event": "^14",

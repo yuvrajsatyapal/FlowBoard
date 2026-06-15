@@ -1,5 +1,5 @@
 import { api } from "../lib/axiosInstance"
-import type { SearchResponse } from "@flowgrid/types"
+import type { SearchResponse } from "@flowboard/types"
 
 export const searchApi = {
   async search(q: string, workspaceId: string, limit = 20, offset = 0): Promise<SearchResponse> {

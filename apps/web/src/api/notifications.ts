@@ -1,5 +1,5 @@
 import { api } from "../lib/axiosInstance"
-import type { AppNotification } from "@flowgrid/types"
+import type { AppNotification } from "@flowboard/types"
 
 export interface NotificationPage {
   notifications: AppNotification[]

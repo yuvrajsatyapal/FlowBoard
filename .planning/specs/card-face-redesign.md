@@ -5,7 +5,7 @@
 **Deprecated**: 2026-06-01
 **Replaced by**: `.planning/specs/card-face.md` — Card Face — Compact Kanban Board Tile (authoritative final spec)
 **Author**: team
-**Epic**: FlowGrid SaaS (#10a — precedes card details modal)
+**Epic**: FlowBoard SaaS (#10a — precedes card details modal)
 
 ---
 

@@ -3,7 +3,7 @@
 **Created**: 2026-06-01
 **Status**: draft
 **Author**: Yuvraj Satyapal
-**Epic**: flowgrid-saas (Phase 4)
+**Epic**: flowboard-saas (Phase 4)
 **Depends on**: Features #7, #8, #9 (Cards fully built)
 
 ---

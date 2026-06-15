@@ -1,5 +1,5 @@
 import { api } from "../lib/axiosInstance"
-import type { ActivityResponse } from "@flowgrid/types"
+import type { ActivityResponse } from "@flowboard/types"
 
 export interface ActivityPage {
   items: ActivityResponse[]

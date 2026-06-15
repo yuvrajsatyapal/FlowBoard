@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
-import type { ActivityResponse } from "@flowgrid/types"
+import type { ActivityResponse } from "@flowboard/types"
 import { activitiesApi } from "../../api/activities"
 import { getInitials, getAvatarBg } from "../../utils/avatar"
 

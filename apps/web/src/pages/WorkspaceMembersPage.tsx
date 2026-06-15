@@ -14,7 +14,7 @@ import { useResendInvite } from "../features/workspace/mutations/useResendInvite
 import { useRevokeInvite } from "../features/workspace/mutations/useRevokeInvite"
 import { useWorkspacePresenceSync } from "../features/workspace/realtime/useWorkspacePresenceSync"
 import { useWindowWidth } from "../hooks/useWindowWidth"
-import type { Role } from "@flowgrid/types"
+import type { Role } from "@flowboard/types"
 
 const ASSIGNABLE_ROLES: Role[] = ["ADMIN", "MEMBER", "VIEWER"]
 

@@ -1,4 +1,4 @@
-import type { CardSearchResult, Priority } from "@flowgrid/types"
+import type { CardSearchResult, Priority } from "@flowboard/types"
 
 const PRIORITY_DOT: Record<Priority, string | null> = {
   NONE: null,

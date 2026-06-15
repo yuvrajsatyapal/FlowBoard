@@ -2,7 +2,7 @@ import { prisma } from "./prisma"
 import { emitToUser } from "./socket"
 import { Prisma } from "../../generated/prisma"
 import logger from "./logger"
-import type { NotificationSource, NotificationType } from "@flowgrid/types"
+import type { NotificationSource, NotificationType } from "@flowboard/types"
 
 export type CardRecipient = {
   userId: string

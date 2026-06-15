@@ -4,7 +4,7 @@ import { renderHook, act, waitFor } from "@testing-library/react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { makeFakeSocket, type FakeSocket } from "../test/fakeSocket"
 import type { NotificationPage } from "../api/notifications"
-import type { AppNotification } from "@flowgrid/types"
+import type { AppNotification } from "@flowboard/types"
 
 vi.mock("../lib/socket", () => ({ createBoardSocket: vi.fn() }))
 vi.mock("../contexts/AuthContext", () => ({ useAuth: () => ({ accessToken: "tok" }) }))

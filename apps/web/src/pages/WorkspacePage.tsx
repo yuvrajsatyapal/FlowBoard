@@ -8,7 +8,7 @@ import { cardsApi, type UpcomingCard } from "../api/cards"
 import BoardCard from "../components/boards/BoardCard"
 import CreateBoardModal from "../components/boards/CreateBoardModal"
 import EditBoardModal from "../components/boards/EditBoardModal"
-import type { ActivityResponse } from "@flowgrid/types"
+import type { ActivityResponse } from "@flowboard/types"
 import { getInitials, getAvatarBg } from "../utils/avatar"
 import { useAuth } from "../contexts/AuthContext"
 import { useWorkspaceSocket } from "../hooks/useWorkspaceSocket"
@@ -209,7 +209,7 @@ type FilterType = "all" | "pinned"
 type ViewType = "grid" | "list"
 
 function getPinnedKey(workspaceId: string): string {
-  return `flowgrid:pinned:${workspaceId}`
+  return `flowboard:pinned:${workspaceId}`
 }
 
 function loadPinned(workspaceId: string): Set<string> {
@@ -229,8 +229,8 @@ function savePinned(workspaceId: string, ids: Set<string>): void {
 
 // ── Board search shortcut hint ─────────────────────────────────────────────────
 
-const LS_BOARD_HINT_COUNT = "flowgrid:boardSearchShortcutHintCount"
-const LS_BOARD_SHORTCUT_USED = "flowgrid:hasUsedBoardSearchShortcut"
+const LS_BOARD_HINT_COUNT = "flowboard:boardSearchShortcutHintCount"
+const LS_BOARD_SHORTCUT_USED = "flowboard:hasUsedBoardSearchShortcut"
 
 function getBoardHintCount(): number {
   try { return parseInt(localStorage.getItem(LS_BOARD_HINT_COUNT) ?? "0", 10) || 0 } catch { return 0 }
@@ -369,7 +369,7 @@ export default function WorkspacePage() {
   const [search, setSearch] = useState("")
   const [filter, setFilter] = useState<FilterType>("all")
   const [view, setView] = useState<ViewType>(() => {
-    try { return (localStorage.getItem("flowgrid:boardsView") as ViewType) ?? "grid" } catch { return "grid" }
+    try { return (localStorage.getItem("flowboard:boardsView") as ViewType) ?? "grid" } catch { return "grid" }
   })
   const [page, setPage] = useState(1)
 
@@ -472,7 +472,7 @@ export default function WorkspacePage() {
 
   const handleViewChange = (v: ViewType) => {
     setView(v)
-    try { localStorage.setItem("flowgrid:boardsView", v) } catch { /* ignore */ }
+    try { localStorage.setItem("flowboard:boardsView", v) } catch { /* ignore */ }
   }
 
   const fetchDetail = useCallback(async () => {

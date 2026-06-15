@@ -6,7 +6,7 @@ import { useCommentRealtimeSync } from "./useCommentRealtimeSync"
 import { cardKeys } from "../queries/keys"
 import { makeFakeSocket } from "../../../test/fakeSocket"
 import type { CommentPage } from "../../../api/comments"
-import type { CommentResponse } from "@flowgrid/types"
+import type { CommentResponse } from "@flowboard/types"
 
 const cardId = "card1"
 

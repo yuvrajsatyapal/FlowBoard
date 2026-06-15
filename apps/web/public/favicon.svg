@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="6" fill="oklch(52% 0.22 260)"/>
-  <rect x="7" y="7" width="8" height="18" rx="2" fill="white" opacity="0.9"/>
-  <rect x="18" y="7" width="7" height="11" rx="2" fill="white" opacity="0.6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#FCF9F6"/>
+  <text x="5" y="23"
+        font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
+        font-weight="700"
+        font-size="17"
+        fill="#CA4A2C"
+        letter-spacing="-0.5">FB</text>
 </svg>

@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { prisma } from "../lib/prisma"
 import { validateJWT } from "../middleware/auth"
-import type { AnalyticsData, CardsByPriority, CardsByBoard, ActivityByDay, TopMember } from "@flowgrid/types"
+import type { AnalyticsData, CardsByPriority, CardsByBoard, ActivityByDay, TopMember } from "@flowboard/types"
 import type { Priority } from "../../generated/prisma"
 import logger from "../lib/logger"
 

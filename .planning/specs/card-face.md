@@ -3,14 +3,14 @@
 **Created**: 2026-06-01
 **Status**: final
 **Author**: team
-**Epic**: FlowGrid SaaS (#10a)
+**Epic**: FlowBoard SaaS (#10a)
 **Implementation**: `apps/web/src/components/boards/CardItem.tsx` — merged to `main`
 
 ---
 
 ## Purpose
 
-This document is the **authoritative reference** for what the FlowGrid kanban card tile shows, how it handles every data state, and what it intentionally does not show. It supersedes the earlier implementation spec (`card-face-redesign.md`). Any future changes to the card tile must be evaluated against the constraints and rules here.
+This document is the **authoritative reference** for what the FlowBoard kanban card tile shows, how it handles every data state, and what it intentionally does not show. It supersedes the earlier implementation spec (`card-face-redesign.md`). Any future changes to the card tile must be evaluated against the constraints and rules here.
 
 ---
 

@@ -76,5 +76,5 @@ app.use("/api/card-templates", cardTemplatesRouter)
 app.use(errorHandler)
 
 httpServer.listen(env.PORT, () => {
-  logger.info(`FlowGrid API started`, { port: env.PORT, env: env.NODE_ENV })
+  logger.info(`FlowBoard API started`, { port: env.PORT, env: env.NODE_ENV })
 })

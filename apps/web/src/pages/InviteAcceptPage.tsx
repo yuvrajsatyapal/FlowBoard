@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useAuth } from "../contexts/AuthContext"
 import { invitesApi } from "../api/invites"
 import { workspaceKeys } from "../features/workspace/queries/keys"
-import type { Role } from "@flowgrid/types"
+import type { Role } from "@flowboard/types"
 
 const ROLE_LABELS: Record<Role, string> = {
   OWNER: "Owner",

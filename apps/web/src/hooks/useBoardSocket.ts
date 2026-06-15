@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext"
 import { createBoardSocket } from "../lib/socket"
 import type { CardSummary } from "../api/cards"
 import type { ListSummary } from "../api/lists"
-import type { CommentResponse, PresenceUser } from "@flowgrid/types"
+import type { CommentResponse, PresenceUser } from "@flowboard/types"
 
 interface BoardSocketHandlers {
   onCardCreated?: (card: CardSummary) => void
@@ -71,5 +71,5 @@ export function useBoardSocket(
   return { onlineUsers, socket }
 }
 
-// Re-export CommentResponse so CardDetailModal can use it without importing from @flowgrid/types directly
+// Re-export CommentResponse so CardDetailModal can use it without importing from @flowboard/types directly
 export type { CommentResponse }

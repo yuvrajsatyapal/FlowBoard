@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, Link } from "react-router-dom"
 import { activitiesApi } from "../api/activities"
-import type { ActivityResponse } from "@flowgrid/types"
+import type { ActivityResponse } from "@flowboard/types"
 import { getInitials, getAvatarBg } from "../utils/avatar"
 
 // ── Icons ──────────────────────────────────────────────────────────────────────

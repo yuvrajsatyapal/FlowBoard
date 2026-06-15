@@ -97,7 +97,7 @@ function ProgressBar({ step }: { step: number }) {
   )
 }
 
-// ── FlowGrid logo mark (shared) ───────────────────────────────────────────────
+// ── FlowBoard logo mark (shared) ───────────────────────────────────────────────
 
 const LogoMark = () => (
   <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
@@ -107,7 +107,7 @@ const LogoMark = () => (
       <rect x="22" y="8" width="10" height="16" rx="2" fill="white" opacity="0.6" />
     </svg>
     <span style={{ fontSize: "var(--text-base)", fontWeight: 600, letterSpacing: "-0.02em", fontFamily: "var(--font-display)" }}>
-      FlowGrid
+      FlowBoard
     </span>
   </div>
 )
@@ -140,7 +140,7 @@ function StepDisplayName({ onNext }: Step1Props) {
           What's your name?
         </h1>
         <p style={{ margin: "6px 0 0", fontSize: "var(--text-sm)", color: "oklch(var(--color-ink-2))" }}>
-          This is how your teammates will see you in FlowGrid.
+          This is how your teammates will see you in FlowBoard.
         </p>
       </div>
 
@@ -364,7 +364,7 @@ export default function OnboardingPage() {
 
         <p style={{ fontSize: "var(--text-xs)", color: "oklch(var(--color-ink-3))", textAlign: "center", margin: 0 }}>
           Need help?{" "}
-          <a href="mailto:support@flowgrid.app" style={{ color: "oklch(var(--color-accent))", textDecoration: "none" }}>
+          <a href="mailto:support@flowboard.app" style={{ color: "oklch(var(--color-accent))", textDecoration: "none" }}>
             Contact support
           </a>
         </p>

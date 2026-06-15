@@ -4,7 +4,7 @@ import { env } from "../config/env"
 import { verifyAccessToken } from "./jwt"
 import { redis, redisKeys } from "./redis"
 import { prisma } from "./prisma"
-import type { PresenceUser } from "@flowgrid/types"
+import type { PresenceUser } from "@flowboard/types"
 
 let io: Server
 

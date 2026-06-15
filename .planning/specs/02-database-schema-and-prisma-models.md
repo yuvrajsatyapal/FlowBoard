@@ -4,13 +4,13 @@
 **Created**: 2026-05-31
 **Status**: draft
 **Author**: team
-**Epic**: FlowGrid — Production-Grade Project Management SaaS
+**Epic**: FlowBoard — Production-Grade Project Management SaaS
 
 ---
 
 ## Problem
 
-FlowGrid's Prisma schema is empty — no models, no migrations, no types. Every feature from #3 (auth) through #20 (infra) is blocked until a stable data layer exists. The schema must be designed correctly now: the hierarchy (org → workspace → board), card ordering strategy, soft-delete scope, and membership model are architectural decisions that become expensive to change once downstream features are built on top of them.
+FlowBoard's Prisma schema is empty — no models, no migrations, no types. Every feature from #3 (auth) through #20 (infra) is blocked until a stable data layer exists. The schema must be designed correctly now: the hierarchy (org → workspace → board), card ordering strategy, soft-delete scope, and membership model are architectural decisions that become expensive to change once downstream features are built on top of them.
 
 ---
 

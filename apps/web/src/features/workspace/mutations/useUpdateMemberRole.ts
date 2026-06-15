@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import type { Role } from "@flowgrid/types"
+import type { Role } from "@flowboard/types"
 import { workspacesApi, type WorkspaceMember } from "../../../api/workspaces"
 import { workspaceKeys } from "../queries/keys"
 

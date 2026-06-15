@@ -28,26 +28,26 @@ export async function sendInviteEmail({ to, inviterName, workspaceName, role, in
 
   try {
     await resend.emails.send({
-      from: "FlowGrid <invites@flowgrid.app>",
+      from: "FlowBoard <invites@flowboard.app>",
       to,
-      subject: `${inviterName} invited you to ${workspaceName} on FlowGrid`,
+      subject: `${inviterName} invited you to ${workspaceName} on FlowBoard`,
       text: [
         `Hi there,`,
         ``,
-        `${inviterName} has invited you to join the "${workspaceName}" workspace on FlowGrid as a ${roleLabel}.`,
+        `${inviterName} has invited you to join the "${workspaceName}" workspace on FlowBoard as a ${roleLabel}.`,
         ``,
         `Accept your invitation:`,
         inviteUrl,
         ``,
         `This invite expires in 7 days. If you weren't expecting this, you can safely ignore it.`,
         ``,
-        `— The FlowGrid team`,
+        `— The FlowBoard team`,
       ].join("\n"),
       html: `
         <div style="font-family:sans-serif;max-width:480px;margin:0 auto;color:#111">
           <p>Hi there,</p>
           <p><strong>${escapeHtml(inviterName)}</strong> has invited you to join the
-            <strong>${escapeHtml(workspaceName)}</strong> workspace on FlowGrid as a
+            <strong>${escapeHtml(workspaceName)}</strong> workspace on FlowBoard as a
             <strong>${escapeHtml(roleLabel)}</strong>.</p>
           <p style="margin:24px 0">
             <a href="${escapeHtml(inviteUrl)}"

@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useLayoutEffect, useEffect } from "react"
 import { createPortal } from "react-dom"
 import { AnimatePresence, motion } from "framer-motion"
-import type { PresenceUser } from "@flowgrid/types"
+import type { PresenceUser } from "@flowboard/types"
 import { getInitials } from "../../utils/avatar"
 
 interface BoardPresenceProps {

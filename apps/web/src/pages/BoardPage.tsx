@@ -39,7 +39,7 @@ import { useCreateList } from "../features/board/mutations/useCreateList"
 import { useCardCacheSync } from "../features/board/cache/useCardCacheSync"
 import { useBoardRealtimeSync } from "../features/board/cache/useBoardRealtimeSync"
 import { boardKeys } from "../features/board/queries/keys"
-import { MAX_CARDS_PER_LIST } from "@flowgrid/types"
+import { MAX_CARDS_PER_LIST } from "@flowboard/types"
 import { useAuth } from "../contexts/AuthContext"
 import { getInitials, getAvatarBg } from "../utils/avatar"
 

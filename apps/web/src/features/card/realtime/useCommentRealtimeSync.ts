@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query"
 import type { Socket } from "socket.io-client"
-import type { CommentResponse } from "@flowgrid/types"
+import type { CommentResponse } from "@flowboard/types"
 import { useRealtimeCacheSync } from "../../../lib/cache/useRealtimeCacheSync"
 import type { CommentPage } from "../../../api/comments"
 import { cardKeys } from "../queries/keys"

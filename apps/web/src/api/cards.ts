@@ -1,5 +1,5 @@
 import { api } from "../lib/axiosInstance"
-import type { Priority } from "@flowgrid/types"
+import type { Priority } from "@flowboard/types"
 
 export interface CardAssignee {
   id: string

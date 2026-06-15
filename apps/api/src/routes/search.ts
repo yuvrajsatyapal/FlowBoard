@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { prisma } from "../lib/prisma"
 import { validateJWT } from "../middleware/auth"
-import type { CardSearchResult } from "@flowgrid/types"
+import type { CardSearchResult } from "@flowboard/types"
 import logger from "../lib/logger"
 
 export const searchRouter = Router()

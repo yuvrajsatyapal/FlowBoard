@@ -1,7 +1,7 @@
 # Plan: Feature #6 — Team Invites, Roles & Permissions
 
 **Spec**: `.planning/specs/06-team-invites-roles-permissions.md`
-**Epic**: FlowGrid SaaS (`flowgrid-saas.md`)
+**Epic**: FlowBoard SaaS (`flowboard-saas.md`)
 **Created**: 2026-06-01
 **Status**: draft
 

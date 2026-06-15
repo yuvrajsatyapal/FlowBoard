@@ -3,13 +3,13 @@
 **Created**: 2026-06-01
 **Status**: draft
 **Author**: Yuvraj Satyapal
-**Epic**: FlowGrid SaaS (`flowgrid-saas.md`)
+**Epic**: FlowBoard SaaS (`flowboard-saas.md`)
 
 ---
 
 ## Problem
 
-FlowGrid workspaces currently have no invite mechanism — there is no way for an owner to bring
+FlowBoard workspaces currently have no invite mechanism — there is no way for an owner to bring
 specific teammates in with controlled access. All workspace members share the same implicit role
 (effectively ADMIN). This means:
 

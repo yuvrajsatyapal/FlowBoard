@@ -1,8 +1,8 @@
-# FlowGrid UI Feature-Parity Implementation Plan
+# FlowBoard UI Feature-Parity Implementation Plan
 
 > **For agentic workers:** Implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. After each phase, run the **Verification** block. Update the **Progress Log** at the bottom so a fresh session can resume from the exact stopping point.
 
-**Goal:** Make every FlowGrid app screen match the `stitch_flowgrid_saas_Ui/` mockups *exactly*, in both themes, and implement every feature shown in those mockups (using the existing backend wherever possible).
+**Goal:** Make every FlowBoard app screen match the `stitch_flowboard_saas_Ui/` mockups *exactly*, in both themes, and implement every feature shown in those mockups (using the existing backend wherever possible).
 
 **Architecture:** Dual-theme design system driven entirely by OKLCH CSS variables in `apps/web/src/styles/tokens.css` (already remapped: **dark = Apex Precision**, **light = Editorial Precision**). Pages are React + inline styles that consume those variables, so structural work is per-component. Backend is Express + Prisma + Upstash Redis (`apps/api`) and is already feature-complete for almost everything; a few endpoints need small additions (flagged ⚠️BACKEND).
 
@@ -21,22 +21,22 @@
    - In the preview page, set the cookie and reload:
      ```js
      document.cookie = "fg_refresh=<refreshToken>; path=/";
-     localStorage.setItem('flowgrid:theme','dark'); // or 'light'
+     localStorage.setItem('flowboard:theme','dark'); // or 'light'
      location.href = '/<workspaceId>';
      ```
    - The SPA calls `POST /api/auth/refresh` on mount → authenticates. **Delete `_qa_mint.ts` when done** (it's a QA-only artifact).
-4. **Toggle themes** via the sun/moon button at the bottom of the sidebar, or `localStorage.setItem('flowgrid:theme', 'dark'|'light')` + reload.
+4. **Toggle themes** via the sun/moon button at the bottom of the sidebar, or `localStorage.setItem('flowboard:theme', 'dark'|'light')` + reload.
 5. **Always finish a task with:** `cd apps/web && npx tsc --noEmit` (must pass) and a `preview_screenshot` in BOTH themes compared against the matching mockup `screen.png`.
 
 **Mockup reference files** (each folder has `screen.png`; design tokens in `apex_precision/DESIGN.md` + `editorial_precision/DESIGN.md`):
 | Screen | Dark mockup folder | Light mockup folder |
 |---|---|---|
-| Dashboard/Boards | `flowgrid_premium_dashboard_redesign` | `flowgrid_dashboard_themed_variant` |
-| Kanban board | `flowgrid_kanban_workspace_apex_dark_variant` | `flowgrid_kanban_workspace_light_editorial_variant` |
-| Analytics | `flowgrid_analytics_apex_dark_variant` | `flowgrid_analytics_editorial_premium_redesign` |
-| Members | `flowgrid_members_apex_dark_variant` | `flowgrid_members_editorial_light_variant` |
-| Task details | `flowgrid_task_details_apex_dark_variant` | `flowgrid_task_details_editorial_light_variant` |
-| Workspace settings | `flowgrid_workspace_settings_apex_dark_variant` | `flowgrid_workspace_settings_editorial_light_variant` |
+| Dashboard/Boards | `flowboard_premium_dashboard_redesign` | `flowboard_dashboard_themed_variant` |
+| Kanban board | `flowboard_kanban_workspace_apex_dark_variant` | `flowboard_kanban_workspace_light_editorial_variant` |
+| Analytics | `flowboard_analytics_apex_dark_variant` | `flowboard_analytics_editorial_premium_redesign` |
+| Members | `flowboard_members_apex_dark_variant` | `flowboard_members_editorial_light_variant` |
+| Task details | `flowboard_task_details_apex_dark_variant` | `flowboard_task_details_editorial_light_variant` |
+| Workspace settings | `flowboard_workspace_settings_apex_dark_variant` | `flowboard_workspace_settings_editorial_light_variant` |
 
 ---
 
@@ -86,7 +86,7 @@ Already completed and verified in both themes:
 
 ## Phase 1 — Dashboard / Boards page (`WorkspacePage.tsx`)
 
-**Target (from `flowgrid_premium_dashboard_redesign` / `flowgrid_dashboard_themed_variant`):**
+**Target (from `flowboard_premium_dashboard_redesign` / `flowboard_dashboard_themed_variant`):**
 Header (done) → search + filter chips + view toggle → board grid with rich cards → Recent Activity + Upcoming Deadlines two-column section.
 
 **Files:**
@@ -106,7 +106,7 @@ Header (done) → search + filter chips + view toggle → board grid with rich c
 - [ ] **Verify:** chips switch board set; active styling correct in both themes.
 
 ### Task 1.2 — View toggle (grid / list)
-- [ ] Add `const [view, setView] = useState<'grid'|'list'>('grid')` (persist to `localStorage('flowgrid:boardsView')`).
+- [ ] Add `const [view, setView] = useState<'grid'|'list'>('grid')` (persist to `localStorage('flowboard:boardsView')`).
 - [ ] Add the two-icon toggle at the far right of the search row (grid icon + list icon; active has `--color-paper-3` bg). Icons: 2x2 squares + horizontal lines (copy style from mockup).
 - [ ] When `view==='list'`, render boards as full-width rows (cover swatch chip + name + visibility + listCount + updated time) instead of the grid.
 - [ ] **Verify:** toggle switches layout; persists across reload.
@@ -146,7 +146,7 @@ Header (done) → search + filter chips + view toggle → board grid with rich c
 
 ## Phase 2 — Analytics page (`AnalyticsPage.tsx`)
 
-**Target (`flowgrid_analytics_apex_dark_variant` / `flowgrid_analytics_editorial_premium_redesign`):**
+**Target (`flowboard_analytics_apex_dark_variant` / `flowboard_analytics_editorial_premium_redesign`):**
 Eyebrow "WORKSPACE OVERVIEW" + "Analytics" title + "Last updated: Just now" + "Last 30 Days" dropdown + Export button → 4 stat cards (icon + value + trend%) → Cards by Priority (donut + legend) + Cards by Board (bar) → Activity Over Time (line chart / empty state with "View Raw Logs") → Team Insights / Top Contributors (rows + Invite Member tile).
 
 **Files:**
@@ -196,7 +196,7 @@ Eyebrow "WORKSPACE OVERVIEW" + "Analytics" title + "Last updated: Just now" + "L
 
 ## Phase 3 — Members page (`WorkspaceMembersPage.tsx`)
 
-**Target (`flowgrid_members_apex_dark_variant` / `flowgrid_members_editorial_light_variant`):**
+**Target (`flowboard_members_apex_dark_variant` / `flowboard_members_editorial_light_variant`):**
 "Team Members" title + subtitle + Export CSV + Team Settings buttons → stat cards (with icons) → Invite New Member row → Active Members (search + rows with status dot + ⋮ menu) → No Pending Invites empty state.
 
 **Files:** Modify `apps/web/src/pages/WorkspaceMembersPage.tsx`.
@@ -229,7 +229,7 @@ Eyebrow "WORKSPACE OVERVIEW" + "Analytics" title + "Last updated: Just now" + "L
 
 ## Phase 4 — Kanban board + cards (`BoardPage.tsx`, `CardItem.tsx`, `ListColumn.tsx`)
 
-**Target (`flowgrid_kanban_workspace_*`):**
+**Target (`flowboard_kanban_workspace_*`):**
 Board header (title + "Team · visibility") → columns with count badges (+ status blip on In Progress) → cards: category label chip, title, assignee avatar(s) + `+N`, comment count, attachment count, status pill ("In Review"), due-date flag, completed strikethrough + "Completed <date>".
 
 **Files:** Modify `apps/web/src/components/boards/CardItem.tsx`, `ListColumn.tsx`, `apps/web/src/pages/BoardPage.tsx`. Read first to learn current structure.
@@ -257,7 +257,7 @@ Board header (title + "Team · visibility") → columns with count badges (+ sta
 
 ## Phase 5 — Task details modal (`CardDetailModal.tsx` + sections)
 
-**Target (`flowgrid_task_details_*`):** Most already implemented. Missing header chrome.
+**Target (`flowboard_task_details_*`):** Most already implemented. Missing header chrome.
 
 **Files:** Modify `apps/web/src/components/boards/CardDetailModal.tsx` (and confirm `ChecklistSection`, `AttachmentSection`, `WatchersSection`, `DependenciesSection`, `CommentThread`).
 
@@ -276,13 +276,13 @@ Board header (title + "Team · visibility") → columns with count badges (+ sta
 
 ## Phase 6 — Workspace settings (`WorkspaceSettingsPage.tsx`)
 
-**Target (`flowgrid_workspace_settings_*`):**
-Top bar (breadcrumb "FlowGrid › Workspace Settings" + Live badge, notif/search icons, Cancel + Save Changes) → title + subtitle + Actions dropdown → Identity & Branding (logo upload/remove, Accent Color swatches + hex) → General Information (Workspace Name, Workspace URL slug, Description) → right Preview card + meta (Created/Members/Boards) → Danger Zone (done). Editorial variant shows a left sub-nav (General/Members/Billing/Integrations/Security). **DECIDED: omit the sub-nav entirely** — the page is a single General settings view (no Billing/Integrations/Security, those have no backend). Do not render the sub-nav column.
+**Target (`flowboard_workspace_settings_*`):**
+Top bar (breadcrumb "FlowBoard › Workspace Settings" + Live badge, notif/search icons, Cancel + Save Changes) → title + subtitle + Actions dropdown → Identity & Branding (logo upload/remove, Accent Color swatches + hex) → General Information (Workspace Name, Workspace URL slug, Description) → right Preview card + meta (Created/Members/Boards) → Danger Zone (done). Editorial variant shows a left sub-nav (General/Members/Billing/Integrations/Security). **DECIDED: omit the sub-nav entirely** — the page is a single General settings view (no Billing/Integrations/Security, those have no backend). Do not render the sub-nav column.
 
 **Files:** Modify `apps/web/src/pages/WorkspaceSettingsPage.tsx`; `apps/web/src/api/workspaces.ts` (ensure `slug`, counts available); maybe `apps/api/src/routes/workspaces.ts` ⚠️BACKEND (return board count + member count + createdAt if not already on detail).
 
 ### Task 6.1 — Sticky top action bar
-- [ ] Add a top bar: breadcrumb "FlowGrid › Workspace Settings" + a small "Live" status badge (accent dot). Right side: Cancel (reverts form to loaded values) + Save Changes (accent). Wire Save to the existing update handler; Cancel resets local form state.
+- [ ] Add a top bar: breadcrumb "FlowBoard › Workspace Settings" + a small "Live" status badge (accent dot). Right side: Cancel (reverts form to loaded values) + Save Changes (accent). Wire Save to the existing update handler; Cancel resets local form state.
 - [ ] **Verify.**
 
 ### Task 6.2 — Title + Actions dropdown
@@ -294,7 +294,7 @@ Top bar (breadcrumb "FlowGrid › Workspace Settings" + Live badge, notif/search
 - [ ] **Verify.**
 
 ### Task 6.4 — General Information (+ Workspace URL)
-- [ ] Card "General Information". Fields: Workspace Name (exists), **Workspace URL** = read-only prefix `flowgrid.app/` + editable slug input bound to `workspace.slug` (⚠️BACKEND: ensure update endpoint accepts `slug`; validate uniqueness server-side — if not supported, render read-only), Description (exists).
+- [ ] Card "General Information". Fields: Workspace Name (exists), **Workspace URL** = read-only prefix `flowboard.app/` + editable slug input bound to `workspace.slug` (⚠️BACKEND: ensure update endpoint accepts `slug`; validate uniqueness server-side — if not supported, render read-only), Description (exists).
 - [ ] **Verify.**
 
 ### Task 6.5 — Preview card + meta

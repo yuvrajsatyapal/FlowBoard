@@ -31,7 +31,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma client
-        run: pnpm --filter @flowgrid/api exec prisma generate
+        run: pnpm --filter @flowboard/api exec prisma generate
 
       - name: Typecheck (all packages)
         run: pnpm typecheck
@@ -64,7 +64,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Generate Prisma client
-        run: pnpm --filter @flowgrid/api exec prisma generate
+        run: pnpm --filter @flowboard/api exec prisma generate
 
       - name: Lint
         run: pnpm lint

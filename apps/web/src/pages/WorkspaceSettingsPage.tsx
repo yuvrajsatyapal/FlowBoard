@@ -429,7 +429,7 @@ export default function WorkspaceSettingsPage() {
         {/* Breadcrumb */}
         <div style={{ flex: 1, minWidth: 0, display: "flex", alignItems: "center", gap: "6px", fontSize: "var(--text-sm)", color: "oklch(var(--color-ink-3))", whiteSpace: "nowrap" }}>
           <Link to={`/${workspaceId}`} style={{ color: "oklch(var(--color-ink-3))", textDecoration: "none", flexShrink: 0 }}>
-            FlowGrid
+            FlowBoard
           </Link>
           <span style={{ flexShrink: 0 }}>›</span>
           <span style={{ color: "oklch(var(--color-ink-2))", fontWeight: 500, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>Workspace Settings</span>
@@ -678,7 +678,7 @@ export default function WorkspaceSettingsPage() {
                     </label>
                     <div style={{ display: "flex", alignItems: "center", borderRadius: "var(--radius-input)", border: "1px solid oklch(var(--color-border))", background: "oklch(var(--color-paper-3))", overflow: "hidden" }}>
                       <span style={{ padding: "8px 10px", fontSize: "var(--text-sm)", color: "oklch(var(--color-ink-3))", borderRight: "1px solid oklch(var(--color-border))", whiteSpace: "nowrap", userSelect: "none", flexShrink: 0 }}>
-                        flowgrid.app/
+                        flowboard.app/
                       </span>
                       <input
                         id="ws-slug"

@@ -6,7 +6,7 @@
 
 **Architecture:** Change `getCardRecipients` to return `{ userId, source }[]` instead of `string[]`. Change `createNotification` to require a typed `source` field. Update all call sites. The TypeScript compiler acts as the test suite — changing the helper signatures causes compile errors at every unupdated call site, which are resolved task-by-task.
 
-**Tech Stack:** Prisma 5 (PostgreSQL), TypeScript, Express, `@flowgrid/types` workspace package, `pnpm` monorepo.
+**Tech Stack:** Prisma 5 (PostgreSQL), TypeScript, Express, `@flowboard/types` workspace package, `pnpm` monorepo.
 
 ---
 
@@ -242,7 +242,7 @@ import { prisma } from "./prisma"
 import { emitToUser } from "./socket"
 import { Prisma } from "../../generated/prisma"
 import logger from "./logger"
-import type { NotificationSource, NotificationType } from "@flowgrid/types"
+import type { NotificationSource, NotificationType } from "@flowboard/types"
 
 export type CardRecipient = {
   userId: string
@@ -623,7 +623,7 @@ Expected: `dist/` updated, no TypeScript errors.
 cd apps/web && pnpm build
 ```
 
-Expected: clean build. If `NotificationDropdown.tsx` or `useNotifications.ts` show errors about missing `source`, they are consuming `AppNotification` from `@flowgrid/types` — the new `source` field is additive and optional from the consumer perspective (they don't have to read it), so no errors expected.
+Expected: clean build. If `NotificationDropdown.tsx` or `useNotifications.ts` show errors about missing `source`, they are consuming `AppNotification` from `@flowboard/types` — the new `source` field is additive and optional from the consumer perspective (they don't have to read it), so no errors expected.
 
 - [ ] **Step 3: Manual smoke test**
 
@@ -637,7 +637,7 @@ Start the API and web app locally. Open a board. Perform each action and confirm
 
 The `pattern_notifications.md` memory file was partially updated during brainstorming. Update it to reflect the completed implementation:
 
-File: `/Users/yuvrajsatyapal/.claude/projects/-Users-yuvrajsatyapal-Desktop-FlowGrid/memory/pattern_notifications.md`
+File: `/Users/yuvrajsatyapal/.claude/projects/-Users-yuvrajsatyapal-Desktop-FlowBoard/memory/pattern_notifications.md`
 
 The key facts to reflect:
 - `createNotification` now requires `source: NotificationSource` (was `string`, no source)
@@ -648,7 +648,7 @@ The key facts to reflect:
 - [ ] **Step 5: Final commit**
 
 ```bash
-git add /Users/yuvrajsatyapal/.claude/projects/-Users-yuvrajsatyapal-Desktop-FlowGrid/memory/pattern_notifications.md
+git add /Users/yuvrajsatyapal/.claude/projects/-Users-yuvrajsatyapal-Desktop-FlowBoard/memory/pattern_notifications.md
 git commit -m "docs: update notification pattern memory after source split implementation"
 ```
 

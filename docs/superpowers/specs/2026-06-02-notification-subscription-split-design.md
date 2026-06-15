@@ -122,7 +122,7 @@ export interface AppNotification {
 ### `CardRecipient` type
 
 ```ts
-import type { NotificationSource, NotificationType } from "@flowgrid/types"
+import type { NotificationSource, NotificationType } from "@flowboard/types"
 
 // Explicit union — easier to read than Exclude<NotificationSource, 'SYSTEM'>
 type CardRecipient = {

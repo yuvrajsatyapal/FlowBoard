@@ -8,7 +8,7 @@ import { canWrite } from "../lib/roles"
 import { emitBoardEvent } from "../lib/socket"
 import { storage, keyFromUrl } from "../lib/storage"
 import logger from "../lib/logger"
-import { MAX_CARDS_PER_LIST } from "@flowgrid/types"
+import { MAX_CARDS_PER_LIST } from "@flowboard/types"
 
 const router = Router()
 

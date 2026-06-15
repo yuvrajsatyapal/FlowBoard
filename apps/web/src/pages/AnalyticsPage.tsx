@@ -12,7 +12,7 @@ import {
 import * as XLSX from "xlsx"
 import { useAnalytics } from "../hooks/useAnalytics"
 import { useWindowWidth } from "../hooks/useWindowWidth"
-import type { Priority } from "@flowgrid/types"
+import type { Priority } from "@flowboard/types"
 
 const PERIOD_OPTIONS = [
   { label: "Last 7 Days", days: 7 },

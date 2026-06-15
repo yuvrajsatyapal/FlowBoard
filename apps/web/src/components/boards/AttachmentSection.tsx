@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import type { AttachmentResponse } from "@flowgrid/types"
+import type { AttachmentResponse } from "@flowboard/types"
 import { attachmentsApi } from "../../api/attachments"
 
 const MAX_FILE_SIZE = 25 * 1024 * 1024

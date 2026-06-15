@@ -1,7 +1,7 @@
 # Plan: Project Scaffold & Monorepo Setup
 
 **Spec**: .planning/specs/01-project-scaffold.md
-**Epic**: flowgrid-saas (Feature #1)
+**Epic**: flowboard-saas (Feature #1)
 **Created**: 2026-05-31
 **Status**: draft
 
@@ -58,12 +58,12 @@ packages/eslint-config  ← shared lint rules
 | `.npmrc` | `/` | `shamefully-hoist=true`, `strict-peer-dependencies=false` |
 | `README.md` | `/` | Setup instructions |
 | `docker-compose.yml` | `/` | Local PostgreSQL for dev |
-| `package.json` | `packages/types/` | Name: `@flowgrid/types`, main: `src/index.ts` |
+| `package.json` | `packages/types/` | Name: `@flowboard/types`, main: `src/index.ts` |
 | `tsconfig.json` | `packages/types/` | Strict, composite: true |
 | `src/index.ts` | `packages/types/` | Re-export barrel (empty for now) |
-| `package.json` | `packages/eslint-config/` | Name: `@flowgrid/eslint-config` |
+| `package.json` | `packages/eslint-config/` | Name: `@flowboard/eslint-config` |
 | `index.js` | `packages/eslint-config/` | Flat ESLint config (TS + React) |
-| `package.json` | `packages/ui/` | Name: `@flowgrid/ui`, scaffold only |
+| `package.json` | `packages/ui/` | Name: `@flowboard/ui`, scaffold only |
 | `package.json` | `apps/api/` | All backend deps |
 | `tsconfig.json` | `apps/api/` | Strict, path alias `@/*` → `src/*` |
 | `.env.example` | `apps/api/` | All env var names with placeholder values |
@@ -111,9 +111,9 @@ Tasks 1.1–1.7 are **all parallel** (independent files).
 
 | # | Task | Files | Notes |
 |---|------|-------|-------|
-| 2.1 | Scaffold `packages/types` | `packages/types/package.json`, `tsconfig.json`, `src/index.ts` | Name: `@flowgrid/types`. Empty barrel export for now. |
+| 2.1 | Scaffold `packages/types` | `packages/types/package.json`, `tsconfig.json`, `src/index.ts` | Name: `@flowboard/types`. Empty barrel export for now. |
 | 2.2 | Scaffold `packages/eslint-config` | `packages/eslint-config/package.json`, `index.js` | Flat config: TS strict + React rules |
-| 2.3 | Scaffold `packages/ui` | `packages/ui/package.json` | Name: `@flowgrid/ui`. Placeholder only. |
+| 2.3 | Scaffold `packages/ui` | `packages/ui/package.json` | Name: `@flowboard/ui`. Placeholder only. |
 
 Tasks 2.1–2.3 are **parallel** (independent packages).
 
@@ -243,7 +243,7 @@ httpServer.listen(env.PORT, () => {
 
 | # | Task | Files | Notes |
 |---|------|-------|-------|
-| 4.1 | Frontend `package.json` + `tsconfig.json` | `apps/web/package.json`, `apps/web/tsconfig.json` | Deps: react, react-dom, react-router-dom, @tanstack/react-query, zustand, framer-motion, axios. devDeps: vite, @vitejs/plugin-react, tailwindcss, @flowgrid/types |
+| 4.1 | Frontend `package.json` + `tsconfig.json` | `apps/web/package.json`, `apps/web/tsconfig.json` | Deps: react, react-dom, react-router-dom, @tanstack/react-query, zustand, framer-motion, axios. devDeps: vite, @vitejs/plugin-react, tailwindcss, @flowboard/types |
 | 4.2 | Vite config | `apps/web/vite.config.ts` | React plugin + `/api` proxy → 3001 + `@/*` alias |
 | 4.3 | Tailwind config | `apps/web/tailwind.config.ts`, `postcss.config.js` | v3 config consuming CSS custom properties |
 | 4.4 | Hallmark design tokens | `apps/web/src/styles/tokens.css` | OKLCH token seed (see below) |
@@ -252,7 +252,7 @@ httpServer.listen(env.PORT, () => {
 | 4.7 | React Query client | `apps/web/src/lib/queryClient.ts` | staleTime: 60s, retry: 1 |
 | 4.8 | HTML entry | `apps/web/index.html` | Root div, script entry, Google font link |
 | 4.9 | React main entry | `apps/web/src/main.tsx` | QueryClientProvider + StrictMode mount |
-| 4.10 | Root App component | `apps/web/src/App.tsx` | Placeholder "FlowGrid is loading..." |
+| 4.10 | Root App component | `apps/web/src/App.tsx` | Placeholder "FlowBoard is loading..." |
 | 4.11 | Env example | `apps/web/.env.example` | VITE_API_BASE_URL |
 
 Tasks 4.1–4.8 are **parallel**. 4.9–4.10 depend on 4.6 + 4.7.
@@ -325,7 +325,7 @@ export default {
 ```css
 /* Hallmark · macrostructure: Workbench · tone: technical-utilitarian · anchor hue: blue
  * genre: modern-minimal · theme: Quiet (seeded) · pre-emit critique: P4 H4 E4 S4 R4 V4
- * FlowGrid design system seed — full tokens emitted per-screen by Hallmark
+ * FlowBoard design system seed — full tokens emitted per-screen by Hallmark
  */
 
 :root,
@@ -461,8 +461,8 @@ export default {
 | `health.ts` (3.8) | `env.ts` (3.3), `redis.ts` (3.4) | Imports both |
 | `index.ts` (3.9) | 3.6, 3.7, 3.8 | Wires all middleware + routes |
 | `main.tsx` (4.9) | `queryClient.ts` (4.7) | Needs QueryClient instance |
-| Phase 3 | Phase 2 | apps/api uses `@flowgrid/types` |
-| Phase 4 | Phase 2 | apps/web uses `@flowgrid/types` |
+| Phase 3 | Phase 2 | apps/api uses `@flowboard/types` |
+| Phase 4 | Phase 2 | apps/web uses `@flowboard/types` |
 | Phase 5 | Phase 3 + 4 | Verification only possible after both apps exist |
 
 ---

@@ -11,7 +11,7 @@ const envSchema = z.object({
   GOOGLE_CLIENT_SECRET: z.string().min(1, "GOOGLE_CLIENT_SECRET is required"),
   JWT_SECRET: z.string().min(32, "JWT_SECRET must be at least 32 characters"),
   JWT_REFRESH_SECRET: z.string().min(32, "JWT_REFRESH_SECRET must be at least 32 characters"),
-  // Used to build the Google OAuth callback URL. In production: https://api.flowgrid.app
+  // Used to build the Google OAuth callback URL. In production: https://api.flowboard.app
   API_BASE_URL: z.string().url().optional(),
   // Resend API key for transactional email (workspace invites). Optional in dev to allow skipping email.
   RESEND_API_KEY: z.string().optional(),

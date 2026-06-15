@@ -1,4 +1,4 @@
-# Epic: FlowGrid — Production-Grade Project Management SaaS
+# Epic: FlowBoard — Production-Grade Project Management SaaS
 
 **Created**: 2026-05-31
 **Status**: planning
@@ -8,7 +8,7 @@
 
 ## Why
 
-FlowGrid is a modern, feature-rich project management SaaS built as a production-grade alternative to Trello. It gives teams a real-time collaborative workspace with boards, lists, cards, multiple views (Kanban, Calendar, Timeline), analytics, and a polished UX — built on a React/Vite + Node.js/Express/PostgreSQL/Upstash Redis stack with WebSockets for live collaboration. The frontend uses the **Hallmark design system** — OKLCH design tokens, structured variety, and 8-state interactive components — ensuring the UI looks built, not AI-generated.
+FlowBoard is a modern, feature-rich project management SaaS built as a production-grade alternative to Trello. It gives teams a real-time collaborative workspace with boards, lists, cards, multiple views (Kanban, Calendar, Timeline), analytics, and a polished UX — built on a React/Vite + Node.js/Express/PostgreSQL/Upstash Redis stack with WebSockets for live collaboration. The frontend uses the **Hallmark design system** — OKLCH design tokens, structured variety, and 8-state interactive components — ensuring the UI looks built, not AI-generated.
 
 ---
 

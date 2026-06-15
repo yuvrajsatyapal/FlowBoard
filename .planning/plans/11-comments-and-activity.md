@@ -1,7 +1,7 @@
 # Plan: Feature #11 — Comments & Activity History
 
 **Spec**: .planning/specs/11-comments-and-activity.md
-**Epic**: flowgrid-saas.md
+**Epic**: flowboard-saas.md
 **Created**: 2026-06-01
 **Status**: draft
 

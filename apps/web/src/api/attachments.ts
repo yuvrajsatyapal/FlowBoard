@@ -1,5 +1,5 @@
 import { api } from "../lib/axiosInstance"
-import type { AttachmentResponse } from "@flowgrid/types"
+import type { AttachmentResponse } from "@flowboard/types"
 
 export const attachmentsApi = {
   async list(cardId: string): Promise<AttachmentResponse[]> {

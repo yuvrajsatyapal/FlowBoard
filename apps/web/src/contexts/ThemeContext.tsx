@@ -14,7 +14,7 @@ const ThemeContext = createContext<ThemeContextValue>({
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem("flowgrid:theme")
+    const saved = localStorage.getItem("flowboard:theme")
     if (saved === "dark" || saved === "light") return saved
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
   })
@@ -28,7 +28,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       root.classList.remove("dark")
     }
-    localStorage.setItem("flowgrid:theme", theme)
+    localStorage.setItem("flowboard:theme", theme)
   }, [theme])
 
   const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"))
