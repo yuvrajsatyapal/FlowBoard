@@ -49,3 +49,9 @@ apps/api/uploads/
 .claude/
 .superpowers/
 .playwright-mcp/
+
+# Project planning, memory, and design tooling (local only)
+.hallmark/
+.memory/
+.planning/
+docs/superpowers/

@@ -117,7 +117,7 @@ Modern teams waste time juggling disconnected tools. FlowGrid solves this by giv
 - Workspace colors, logos (Cloudinary upload), and descriptions
 - Soft-deleted workspaces (data preserved, never hard-deleted)
 - Role-based access: `OWNER`, `ADMIN`, `MEMBER`, `VIEWER`
-- Workspace invite system with in-app notifications and optional email delivery via Resend
+- Workspace invite system with in-app notifications
 
 ### Board Management
 - Create unlimited Kanban boards per workspace
@@ -240,7 +240,6 @@ Modern teams waste time juggling disconnected tools. FlowGrid solves this by giv
 | **Tokens** | JWT (access + refresh) | Stateless auth with rotation |
 | **File Storage** | Cloudinary | Attachments, avatars, logos |
 | **File Upload** | Multer | Multipart form handling |
-| **Email** | Resend | Workspace invite emails |
 | **Realtime (server)** | Socket.IO 4 | WebSocket server |
 | **Logging** | Winston | Structured HTTP + error logging |
 | **Validation** | Zod | Environment variable validation |
@@ -265,7 +264,6 @@ flowchart TD
     Redis["Upstash Redis\n(sessions, presence,\nrate limits)"]
     Cloudinary["Cloudinary CDN\n(attachments, avatars)"]
     Google["Google OAuth 2.0"]
-    Resend["Resend\n(invite emails)"]
 
     Browser -->|HTTP / REST| Vite
     Browser -->|WebSocket| SocketIO
@@ -273,7 +271,6 @@ flowchart TD
     Express --> Prisma
     Express --> Redis
     Express --> Cloudinary
-    Express --> Resend
     Express -->|OAuth redirect| Google
     Google -->|callback| Express
     Prisma --> PG
@@ -293,7 +290,7 @@ flowchart LR
     end
 
     subgraph Gateway["API Gateway"]
-        Nginx["nginx\n(prod TLS termination,\nstatic file serving)"]
+        Nginx["nginx\n(static files, gzip,\n/api proxy to Express)"]
     end
 
     subgraph API["API Layer (Express + Socket.IO)"]
@@ -311,7 +308,6 @@ flowchart LR
     subgraph External["External Services"]
         GoogleOAuth["Google OAuth 2.0"]
         CloudinarySvc["Cloudinary\nCDN + Transform"]
-        ResendSvc["Resend\nTransactional Email"]
     end
 
     SPA -->|HTTPS + Bearer JWT| Nginx
@@ -327,7 +323,6 @@ flowchart LR
     SocketSrv --> PG
     Auth -->|redirect| GoogleOAuth
     REST -->|upload stream| CloudinarySvc
-    REST -->|send email| ResendSvc
 ```
 
 ---
@@ -352,7 +347,6 @@ flowgrid/                       ← pnpm monorepo root
 │   │   │   │   ├── jwt.ts      ← Token signing + verification
 │   │   │   │   ├── passport.ts ← Google OAuth strategy
 │   │   │   │   ├── storage.ts  ← Cloudinary StorageProvider
-│   │   │   │   ├── email.ts    ← Resend invite emails
 │   │   │   │   ├── notifications.ts ← createNotification helper
 │   │   │   │   ├── activity.ts ← logActivity helper
 │   │   │   │   ├── roles.ts    ← RBAC helpers (canWrite, etc.)
@@ -1003,7 +997,6 @@ All endpoints are prefixed with `/api`. JWT required on all routes except `/api/
 | `CORS_ORIGIN` | — | `http://localhost:5173` | Allowed CORS origin |
 | `API_BASE_URL` | — | — | Public API URL used in OAuth callback URL (required in production) |
 | `APP_URL` | — | `http://localhost:5173` | Public app URL used in invite email links |
-| `RESEND_API_KEY` | — | — | Resend API key for invite emails (optional in dev) |
 | `LOG_LEVEL` | — | `http` | Winston log level: `debug` \| `http` \| `warn` \| `error` |
 
 ### Frontend (`apps/web/.env`)
@@ -1145,7 +1138,6 @@ LOG_LEVEL=warn                                # Reduce log volume
 - **Database**: [Neon](https://neon.tech) — serverless PostgreSQL, same connection string format
 - **Redis**: [Upstash](https://upstash.com) — HTTP REST, works in any runtime
 - **Storage**: Cloudinary — enable "Auto Quality" + "Auto Format" in dashboard for zero-config image optimization
-- **Email**: [Resend](https://resend.com) — workspace invite emails
 
 ---
 
@@ -1268,10 +1260,3 @@ lint (requires typecheck-and-build to pass)
 
 MIT License — see [LICENSE](./LICENSE) for details.
 
----
-
-<div align="center">
-
-Built with care by [Yuvraj Satyapal](https://github.com/yuvrajsatyapal)
-
-</div>
