@@ -18,10 +18,11 @@ import logger from "../lib/logger"
 const router = Router()
 
 const REFRESH_COOKIE = "fg_refresh"
+const isProd = env.NODE_ENV === "production"
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: env.NODE_ENV === "production",
-  sameSite: "lax" as const,
+  secure: isProd,
+  sameSite: (isProd ? "none" : "lax") as "none" | "lax",
   path: "/api/auth",
   maxAge: REFRESH_TOKEN_TTL_SECONDS * 1000,
 }
