@@ -748,8 +748,8 @@ function Footer() {
         </div>
       </div>
       <p style={{ fontFamily: "'Hanken Grotesk'", fontSize: 'clamp(7px, 2vw, 10px)', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.28)' }}>
-        <span className="sm:hidden">© 2026 FLOWGRID.</span>
-        <span className="hidden sm:inline">© 2026 FLOWGRID. PLAN. BUILD. SHIP.</span>
+        <span className="sm:hidden">© 2026 FLOWBOARD.</span>
+        <span className="hidden sm:inline">© 2026 FLOWBOARD. PLAN. BUILD. SHIP.</span>
       </p>
     </footer>
   )
