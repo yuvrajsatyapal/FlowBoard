@@ -54,7 +54,8 @@ router.get(
       // in this 302 redirect response — proxies (Vercel) strip Set-Cookie from redirects.
       // The SPA exchanges the code via POST /api/auth/exchange, which properly sets the cookie.
       const code = crypto.randomUUID()
-      await redis.set(`oauth_code:${code}`, JSON.stringify({ refreshToken, jti, userId: user.id }), { ex: 60 })
+      // Upstash auto-serializes objects — store/read as object, no JSON.stringify/parse
+      await redis.set(`oauth_code:${code}`, { refreshToken, jti, userId: user.id }, { ex: 60 })
 
       res.redirect(`${env.APP_URL}/auth/callback?code=${code}`)
     } catch (err) {
@@ -73,14 +74,14 @@ router.post("/exchange", authRateLimit, async (req, res) => {
   }
 
   try {
-    const raw = await redis.get<string>(`oauth_code:${code}`)
-    if (!raw) {
+    const data = await redis.get<{ refreshToken: string; jti: string; userId: string }>(`oauth_code:${code}`)
+    if (!data) {
       res.status(401).json({ error: { message: "Invalid or expired code", status: 401 } })
       return
     }
 
     await redis.del(`oauth_code:${code}`)
-    const { refreshToken, userId } = JSON.parse(raw) as { refreshToken: string; jti: string; userId: string }
+    const { refreshToken, userId } = data
 
     const user = await prisma.user.findUnique({ where: { id: userId } })
     if (!user) {
