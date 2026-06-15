@@ -35,7 +35,8 @@ export default function LoginPage() {
   }, [isAuthenticated, isLoading, navigate])
 
   const handleGoogleLogin = () => {
-    window.location.href = "/api/auth/google"
+    const base = import.meta.env.VITE_API_BASE_URL ?? ""
+    window.location.href = `${base}/api/auth/google`
   }
 
   if (isLoading) {

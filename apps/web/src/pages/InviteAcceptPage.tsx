@@ -63,7 +63,8 @@ export default function InviteAcceptPage() {
     if (!isAuthenticated) {
       // Save this URL so AuthCallbackPage can redirect here after OAuth
       sessionStorage.setItem("invite_next", window.location.href)
-      window.location.href = "/api/auth/google"
+      const base = import.meta.env.VITE_API_BASE_URL ?? ""
+      window.location.href = `${base}/api/auth/google`
       return
     }
 
