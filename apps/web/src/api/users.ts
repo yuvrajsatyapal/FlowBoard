@@ -25,8 +25,10 @@ export const usersApi = {
   async uploadAvatar(file: File): Promise<AuthUser> {
     const formData = new FormData()
     formData.append("file", file)
+    // Content-Type must be unset so the browser generates the multipart boundary.
+    // Setting it to "multipart/form-data" by hand omits the boundary and multer fails to parse.
     const res = await api.post<{ user: AuthUser }>("/users/avatar", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { "Content-Type": null },
     })
     return res.data.user
   },
