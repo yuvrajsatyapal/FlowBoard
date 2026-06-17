@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/generate-og.mjs && tsc -b && vite build",
+    "generate:og": "node scripts/generate-og.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@flowboard/eslint-config": "workspace:*",
+    "@resvg/resvg-js": "^2.6.2",
     "@testing-library/jest-dom": "^6",
     "@testing-library/react": "^16",
     "@testing-library/user-event": "^14",

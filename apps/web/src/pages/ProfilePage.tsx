@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
+import { usePageTitle } from "../hooks/usePageTitle"
 import { usersApi } from "../api/users"
 import { getInitials, getAvatarBg } from "../utils/avatar"
 
@@ -53,6 +54,7 @@ const dangerGhostBtn: React.CSSProperties = {
 }
 
 export default function ProfilePage() {
+  usePageTitle("Profile")
   const { user, updateUser } = useAuth()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const windowWidth = useWindowWidth()

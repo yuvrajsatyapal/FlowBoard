@@ -1,0 +1,22 @@
+# FlowBoard — https://flow-board-web-mu.vercel.app/
+# Google Search Central: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+
+User-agent: *
+
+# Public pages — indexable
+Allow: /$
+Allow: /login$
+
+# Auth flows — not useful content for crawlers
+Disallow: /auth/
+Disallow: /invite/
+
+# App shell routes — these redirect to /login for unauthenticated users.
+# Blocking here prevents wasted crawl budget; bots should not follow these.
+Disallow: /dashboard
+Disallow: /onboarding
+
+# Never block /assets/ — Googlebot needs CSS and JS to render pages correctly.
+# See: https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt#allow-css-js
+
+Sitemap: https://flow-board-web-mu.vercel.app/sitemap.xml

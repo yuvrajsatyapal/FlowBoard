@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useParams, Link } from "react-router-dom"
+import { usePageTitle } from "../hooks/usePageTitle"
 import {
   BarChart,
   Bar,
@@ -454,6 +455,7 @@ function PeriodSelect({ value, onChange }: { value: number; onChange: (days: num
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AnalyticsPage() {
+  usePageTitle("Analytics")
   const { workspaceId } = useParams<{ workspaceId: string }>()
   const isMobile = useWindowWidth() < 640
   const [days, setDays] = useState(30)

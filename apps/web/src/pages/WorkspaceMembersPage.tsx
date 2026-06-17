@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams, Link } from "react-router-dom"
+import { usePageTitle } from "../hooks/usePageTitle"
 import * as XLSX from "xlsx"
 import { usersApi, type UserSearchResult } from "../api/users"
 import { useAuth } from "../contexts/AuthContext"
@@ -453,6 +454,7 @@ function RoleSelect({ value, onChange, disabled = false, containerStyle }: {
 // ── Main page ─────────────────────────────────────────────────────────────────
 
 export default function WorkspaceMembersPage() {
+  usePageTitle("Members")
   const { workspaceId } = useParams<{ workspaceId: string }>()
   const { user } = useAuth()
   const windowWidth = useWindowWidth()

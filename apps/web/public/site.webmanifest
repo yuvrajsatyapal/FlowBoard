@@ -1,0 +1,37 @@
+{
+  "name": "FlowBoard",
+  "short_name": "FlowBoard",
+  "description": "Real-time Kanban and project management for teams. Drag-and-drop boards, live collaboration, analytics, and timelines.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FCF9F6",
+  "theme_color": "#CA4A2C",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["productivity", "business", "utilities"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "FlowBoard kanban board and analytics dashboard"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Sign in",
+      "url": "/login",
+      "description": "Sign in to FlowBoard"
+    }
+  ]
+}

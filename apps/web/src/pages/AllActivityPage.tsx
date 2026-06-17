@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, Link } from "react-router-dom"
+import { usePageTitle } from "../hooks/usePageTitle"
 import { activitiesApi } from "../api/activities"
 import type { ActivityResponse } from "@flowboard/types"
 import { getInitials, getAvatarBg } from "../utils/avatar"
@@ -92,6 +93,7 @@ function formatActivityText(activity: ActivityResponse): React.ReactNode {
 // ── Page ───────────────────────────────────────────────────────────────────────
 
 export default function AllActivityPage() {
+  usePageTitle("Activity")
   const { workspaceId } = useParams<{ workspaceId: string }>()
 
   const [activities, setActivities] = useState<ActivityResponse[]>([])

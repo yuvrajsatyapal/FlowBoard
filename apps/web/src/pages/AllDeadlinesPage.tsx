@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
+import { usePageTitle } from "../hooks/usePageTitle"
 import { cardsApi, type UpcomingCard } from "../api/cards"
 
 // ── Icons ──────────────────────────────────────────────────────────────────────
@@ -75,6 +76,7 @@ function groupDeadlines(cards: UpcomingCard[]): { label: string; color: string; 
 const PAGE_SIZE = 20
 
 export default function AllDeadlinesPage() {
+  usePageTitle("Deadlines")
   const { workspaceId } = useParams<{ workspaceId: string }>()
   const navigate = useNavigate()
 
@@ -131,6 +133,22 @@ export default function AllDeadlinesPage() {
           <h1 style={{ margin: 0, fontSize: "var(--text-xl)", fontWeight: 700, fontFamily: "var(--font-display)", whiteSpace: "nowrap" }}>
             All Deadlines
           </h1>
+          {!loading && !error && cards.length > 0 && (
+            <span
+              style={{
+                fontSize: "var(--text-xs)",
+                color: "oklch(var(--color-ink-3))",
+                padding: "3px 10px",
+                borderRadius: "100px",
+                background: "oklch(var(--color-paper-3))",
+                fontWeight: 500,
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+              }}
+            >
+              {cards.length} {cards.length === 1 ? "card" : "cards"}
+            </span>
+          )}
         </div>
       </div>
 
@@ -298,7 +316,7 @@ export default function AllDeadlinesPage() {
                         flexShrink: 0,
                         padding: "2px 7px",
                         borderRadius: "var(--radius-badge)",
-                        background: `${color.replace(")", " / 0.12)")}`,
+                        background: `color-mix(in oklch, ${color} 12%, transparent)`,
                       }}
                     >
                       {label}

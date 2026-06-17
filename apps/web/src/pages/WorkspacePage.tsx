@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { useParams, Link, useNavigate } from "react-router-dom"
+import { usePageTitle } from "../hooks/usePageTitle"
 import { workspacesApi, type WorkspaceDetail } from "../api/workspaces"
 import { boardsApi, type BoardSummary } from "../api/boards"
 import { activitiesApi } from "../api/activities"
@@ -362,6 +363,7 @@ export default function WorkspacePage() {
   )
 
   const [loadingWorkspace, setLoadingWorkspace] = useState(true)
+  usePageTitle(detail?.name ?? "Workspace")
   const [loadingBoards, setLoadingBoards] = useState(true)
   const [error, setError] = useState("")
   const [showCreateModal, setShowCreateModal] = useState(false)
@@ -1431,7 +1433,7 @@ export default function WorkspacePage() {
                           flexShrink: 0,
                           padding: "2px 7px",
                           borderRadius: "var(--radius-badge)",
-                          background: `${color.replace(")", " / 0.12)")}`,
+                          background: `color-mix(in oklch, ${color} 12%, transparent)`,
                         }}
                       >
                         {label}

@@ -1,10 +1,12 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
+import { usePageTitle } from "../hooks/usePageTitle"
 import { useWorkspaceStore } from "../stores/workspaceStore"
 import { useWorkspaceList } from "../features/workspace/queries/useWorkspaceList"
 
 export default function DashboardPage() {
+  usePageTitle("Dashboard")
   const { user } = useAuth()
   const { activeWorkspace } = useWorkspaceStore()
   const listQuery = useWorkspaceList()

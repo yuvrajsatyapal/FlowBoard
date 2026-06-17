@@ -26,15 +26,36 @@ export default defineConfig({
     },
   },
   build: {
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       output: {
+        // Granular chunk splitting gives browsers better long-term cache hits:
+        // each vendor chunk only busts when that specific dependency changes.
         manualChunks: {
-          vendor: ["react", "react-dom"],
-          query: ["@tanstack/react-query"],
+          // Core React runtime — almost never changes
+          react: ["react", "react-dom"],
+          // Router — changes occasionally
           router: ["react-router-dom"],
+          // Data-fetching — may update with the app
+          query: ["@tanstack/react-query"],
+          // Animation — large, changes rarely
           motion: ["framer-motion"],
+          // Drag-and-drop — large, changes rarely
+          dnd: ["@dnd-kit/core", "@dnd-kit/sortable", "@dnd-kit/utilities"],
+          // Charts — large, only used in AnalyticsPage
+          charts: ["recharts"],
+          // Rich-text editor — large, only used in card detail
+          // (@tiptap/pm omitted: its package.json lacks a root "." export)
+          editor: ["@tiptap/react", "@tiptap/starter-kit"],
+          // Spreadsheet export — large, only used in members export
+          xlsx: ["xlsx"],
+          // Calendar — large, only used in BoardCalendarView
+          calendar: ["react-big-calendar"],
         },
+        // Use content hash for cache busting
+        chunkFileNames: "assets/[name]-[hash].js",
+        entryFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash].[ext]",
       },
     },
   },

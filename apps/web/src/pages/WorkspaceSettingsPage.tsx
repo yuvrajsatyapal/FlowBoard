@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { useParams, useNavigate, Link } from "react-router-dom"
+import { usePageTitle } from "../hooks/usePageTitle"
 import { workspacesApi, type WorkspaceDetail } from "../api/workspaces"
 import { useWorkspaceDetail } from "../features/workspace/queries/useWorkspaceDetail"
 import { useWorkspaceList } from "../features/workspace/queries/useWorkspaceList"
@@ -201,6 +202,7 @@ function DeleteDialog({
 // ── WorkspaceSettingsPage ──────────────────────────────────────────────────────
 
 export default function WorkspaceSettingsPage() {
+  usePageTitle("Settings")
   const { workspaceId } = useParams<{ workspaceId: string }>()
   const isCompact = useWindowWidth() < 768
   const navigate = useNavigate()

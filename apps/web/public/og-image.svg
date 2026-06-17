@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0f0f10"/>
+
+  <!-- Subtle grid lines -->
+  <line x1="0" y1="210" x2="1200" y2="210" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <line x1="0" y1="420" x2="1200" y2="420" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <line x1="400" y1="0" x2="400" y2="630" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <line x1="800" y1="0" x2="800" y2="630" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="4" fill="#CA4A2C"/>
+
+  <!-- Logo mark -->
+  <rect x="80" y="72" width="56" height="56" rx="10" fill="#FCF9F6" stroke="#CA4A2C" stroke-width="2"/>
+  <text x="93" y="112" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="26" fill="#CA4A2C" letter-spacing="-1">FB</text>
+
+  <!-- Product name -->
+  <text x="154" y="109" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="28" fill="#FFFFFF" letter-spacing="-0.5">FlowBoard</text>
+
+  <!-- Hero headline -->
+  <text x="80" y="230" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="68" fill="#FFFFFF" letter-spacing="-2">Real-Time Kanban</text>
+  <text x="80" y="315" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="68" fill="#CA4A2C" letter-spacing="-2">Project Management</text>
+
+  <!-- Descriptor -->
+  <text x="80" y="385" font-family="Arial, Helvetica, sans-serif" font-weight="400" font-size="24" fill="rgba(255,255,255,0.60)">Boards · Live collaboration · Analytics · Timelines</text>
+
+  <!-- Feature pill tags -->
+  <rect x="80" y="430" width="152" height="36" rx="18" fill="rgba(202,74,44,0.18)" stroke="rgba(202,74,44,0.5)" stroke-width="1"/>
+  <text x="156" y="453" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="13" fill="#CA4A2C">Real-Time Sync</text>
+
+  <rect x="248" y="430" width="150" height="36" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="323" y="453" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="13" fill="rgba(255,255,255,0.70)">Kanban Boards</text>
+
+  <rect x="414" y="430" width="120" height="36" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="474" y="453" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="13" fill="rgba(255,255,255,0.70)">Analytics</text>
+
+  <rect x="550" y="430" width="120" height="36" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="610" y="453" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="13" fill="rgba(255,255,255,0.70)">Timeline</text>
+
+  <!-- URL -->
+  <text x="80" y="572" font-family="Arial, Helvetica, sans-serif" font-weight="400" font-size="17" fill="rgba(255,255,255,0.35)">flow-board-web-mu.vercel.app</text>
+
+  <!-- Decorative right-side card mock -->
+  <rect x="880" y="120" width="240" height="330" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <rect x="900" y="142" width="200" height="32" rx="4" fill="rgba(202,74,44,0.25)"/>
+  <text x="912" y="163" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="rgba(255,255,255,0.7)">In Progress</text>
+  <rect x="900" y="188" width="200" height="22" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="900" y="218" width="180" height="22" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="900" y="248" width="160" height="22" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="900" y="292" width="200" height="32" rx="4" fill="rgba(26,114,121,0.3)"/>
+  <text x="912" y="313" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="rgba(255,255,255,0.7)">Done</text>
+  <rect x="900" y="338" width="200" height="22" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="900" y="368" width="140" height="22" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="900" y="398" width="170" height="22" rx="3" fill="rgba(255,255,255,0.06)"/>
+</svg>

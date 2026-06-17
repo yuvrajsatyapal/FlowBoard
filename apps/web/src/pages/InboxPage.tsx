@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { usePageTitle } from "../hooks/usePageTitle"
 import { boardsApi } from "../api/boards"
 import { invitesApi } from "../api/invites"
 import { useNotifications } from "../hooks/useNotifications"
@@ -177,6 +178,7 @@ type FilterType = "all" | "unread"
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function InboxPage() {
+  usePageTitle("Inbox")
   // Single source of truth: the shared notifications infinite query (Phase I).
   // Realtime + pagination + mark-read all flow through useNotifications' cache;
   // InboxPage no longer mirrors anything into local state.

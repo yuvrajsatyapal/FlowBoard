@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
+import { usePageTitle } from "../hooks/usePageTitle"
 
 const GOOGLE_ICON = (
   <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
@@ -24,6 +25,7 @@ const GOOGLE_ICON = (
 )
 
 export default function LoginPage() {
+  usePageTitle("Sign in")
   const { isAuthenticated, isLoading } = useAuth()
   const navigate = useNavigate()
 

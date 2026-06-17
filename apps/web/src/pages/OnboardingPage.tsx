@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
+import { usePageTitle } from "../hooks/usePageTitle"
 import { authApi } from "../api/auth"
 import { usersApi } from "../api/users"
 import { workspacesApi } from "../api/workspaces"
@@ -307,6 +308,7 @@ function StepCreateWorkspace({ displayName, onBack, onComplete }: Step2Props) {
 // ── Main OnboardingPage ───────────────────────────────────────────────────────
 
 export default function OnboardingPage() {
+  usePageTitle("Set up your workspace")
   const { user, setTokenAndUser } = useAuth()
   const navigate = useNavigate()
   const [step, setStep] = useState(0)

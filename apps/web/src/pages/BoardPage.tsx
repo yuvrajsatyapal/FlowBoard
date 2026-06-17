@@ -26,6 +26,7 @@ import KeyboardShortcutsModal from "../components/KeyboardShortcutsModal"
 import { useBoardPresence } from "../features/board/presence/useBoardPresence"
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts"
 import { useWindowWidth } from "../hooks/useWindowWidth"
+import { usePageTitle } from "../hooks/usePageTitle"
 import { computeBlockedCardIds } from "../utils/dependencies"
 import { useQueryClient } from "@tanstack/react-query"
 import { useBoardDetail } from "../features/board/queries/useBoardDetail"
@@ -105,6 +106,7 @@ export default function BoardPage() {
   const boardQuery = useBoardDetail(boardId)
   const board = boardQuery.data ?? null
   const loadingBoard = boardQuery.isLoading
+  usePageTitle(board?.name ?? "Board")
   const error = boardQuery.isError ? ((boardQuery.error as Error).message || "Board not found") : ""
 
   const listsQuery = useBoardLists(boardId)

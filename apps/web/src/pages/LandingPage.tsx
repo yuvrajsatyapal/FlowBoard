@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import '../styles/landing.css'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 /* ─── theme ─────────────────────────────────────────────────────────────────── */
 const ThemeCtx = createContext<{ isDark: boolean; toggle: () => void }>({ isDark: false, toggle: () => {} })
@@ -215,7 +216,7 @@ function LandingNav({ scrolled }: { scrolled: boolean }) {
         </a>
 
         {/* Desktop-only: Features + FAQs links */}
-        <nav style={{ gap: 24, alignItems: 'center' }} className="hidden md:flex flex-1 justify-center px-4">
+        <nav aria-label="Main navigation" style={{ gap: 24, alignItems: 'center' }} className="hidden md:flex flex-1 justify-center px-4">
           {[{ label: 'Features', href: '#features' }, { label: 'FAQs', href: '#faqs' }].map(({ label, href }) => (
             <a key={label} href={href}
                style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: P.muted, textDecoration: 'none', borderBottom: `2px solid ${P.border}`, padding: '8px 4px', transition: 'color 0.2s, border-color 0.2s' }}
@@ -707,7 +708,7 @@ const FOOTER_LINKS = [
     ),
   },
   {
-    label: 'Gmail', href: 'yuvrajsatyapal21@gmail.com',
+    label: 'Gmail', href: 'mailto:yuvrajsatyapal21@gmail.com',
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.146C21.69 2.28 24 3.434 24 5.457z"/>
@@ -757,6 +758,7 @@ function Footer() {
 
 /* ─── PAGE ────────────────────────────────────────────────────────────────── */
 export default function LandingPage() {
+  usePageTitle()
   const time = useClock()
   const [scrolled, setScrolled] = useState(false)
   const [isDark, setIsDark] = useState(false)
