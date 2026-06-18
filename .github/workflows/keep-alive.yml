@@ -14,4 +14,11 @@ jobs:
           curl -sf "${{ secrets.BACKEND_URL }}/health" \
             --max-time 30 \
             --retry 2 \
-            || echo "Ping failed or timed out (service may have been cold)"
+            || echo "Backend ping failed or timed out (service may have been cold)"
+
+      - name: Ping frontend
+        run: |
+          curl -sf "${{ secrets.FRONTEND_URL }}" \
+            --max-time 30 \
+            --retry 2 \
+            || echo "Frontend ping failed or timed out"
