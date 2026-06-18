@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Ping backend
         run: |
-          curl -sf "${{ secrets.BACKEND_URL }}/health" \
+          curl -sf "${{ secrets.BACKEND_URL }}/api/health" \
             --max-time 30 \
             --retry 2 \
             || echo "Backend ping failed or timed out (service may have been cold)"
